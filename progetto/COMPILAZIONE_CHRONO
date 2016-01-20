@@ -1,0 +1,3 @@
+S_Annealing.cpp -o s_m -std=gnu++0x
+
+comando per compilare con l'include di chrono

@@ -1,0 +1,73 @@
+
+
+istanze_cl/50_cl_dataset
+
+1	18.621	284.907
+2	22.394	239.721
+3	14.381	215.709
+4	70.029	224.484
+
+
+istanze_cl/60_cl_dataset
+
+
+
+istanze_cl/60_cl_dataset
+
+1	149.389	267.767
+
+
+istanze_line/40_line_dataset
+
+1	9.728	400.632
+2	5.529	283.883
+3	3.721	217.522
+4	6.524	329.906
+
+
+istanze_line/50_line_dataset
+
+1	6.067	286.163
+2	4.844	248.204
+3	7.852	323.377
+4	15.277	368.851
+
+
+istanze_line/60_line_dataset
+
+1	8.883	324.177
+2	20.788	305.244
+3	21.976	370.937
+4	36.334	396.103
+
+
+istanze_circle/40_circle_dataset
+
+1	8.922	338.478
+2	4.741	285.975
+3	3.978	397.894
+4	5.718	195.695
+
+
+istanze_circle/50_circle_dataset
+
+1	15.452	295.731
+2	10.571	429.179
+3	8.959	284.7
+4	23.83	381.692
+
+
+istanze_circle/60_circle_dataset
+
+1	16.495	331.55
+2	15.798	381.601
+3	9.006	229.035
+4	23.704	454.897
+
+
+istanze_cl/70_cl_dataset
+
+
+
+istanze_line/70_line_dataset
+

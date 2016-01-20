@@ -1,0 +1,267 @@
+
+#include <cstdio>
+#include <iostream>
+#include <vector>
+#include "cpxmacro.h"
+#include "Reader.cpp"
+#include <chrono>
+
+
+using namespace std;
+//using namespace std::chrono;
+
+int status;
+char errmsg[BUF_SIZE];
+
+			
+const int NAME_SIZE = 512;
+char name[NAME_SIZE];
+
+int n;
+vector<vector<float> > xy;
+	
+void setupLP(CEnv env, Prob lp)
+{
+	
+	int count = 0;
+	vector<vector<int> > xM;
+	vector<vector<int> > yM;
+	
+	//add Xij var
+	{
+	xM.resize(n);
+	double c = 0;
+	double lb = 0.0;
+	double ub = CPX_INFBOUND;
+	for (int i = 0; i < n; i++){
+		xM[i].resize(n);
+		for (int j = 0; j < n; j++){
+			char xtype = 'I';	//n
+			snprintf(name, NAME_SIZE, "x_%c_%c", i,j);	//scrivo sulla stringa name
+			char* xname = (char*)(&name[0]);
+			CHECKED_CPX_CALL( CPXnewcols, env, lp, 1, &c, &lb, &ub, &xtype, &xname );
+			xM[i][j]=count;
+			count++;
+		}
+	}
+	}
+	
+	//add Yij var
+	{
+	yM.resize(n);
+	double lb = 0;
+	double ub = 1;
+	for (int i = 0; i < n; i++){
+		yM[i].resize(n);
+		for (int j = 0; j< n; j++){
+			char xtype = 'I';	//n
+			double c = xy[i][j];
+			snprintf(name, NAME_SIZE, "x_%c_%c", i,j);	//scrivo sulla stringa name
+			char* xname = (char*)(&name[0]);
+			CHECKED_CPX_CALL( CPXnewcols, env, lp, 1, &c, &lb, &ub, &xtype, &xname );
+			yM[i][j]=count;
+			count++;
+		}
+	} 
+	}   
+	
+	// 1o vincolo
+	// (flusso in ingresso massimo)
+	{
+	char sense = 'E';
+	int matbeg = 0;
+	double rhs = n;
+	vector<int> x0j(n);
+	vector<double> c0j(n,1.0);
+	for (int j = 0; j < n; j++)	{
+		x0j[j] = xM[0][j];
+	}
+	CHECKED_CPX_CALL( CPXaddrows, env, lp, 0, 1, x0j.size(), &rhs, &sense, &matbeg, &x0j[0], &c0j[0], NULL, NULL );
+	}
+	
+	// 2o vincolo
+	// (ogni nodo spreca una singola unita' di flusso)
+	{
+	char sense = 'E';
+	int matbeg = 0;
+	double rhs = 1;
+	for (int k=1; k<n; k++) {
+		vector<int> id(2*n);
+		vector<double> coeff(2*n);
+		for (int i=0; i<n; i++){
+			id[i] = xM[i][k];
+			coeff[i] = 1;
+		}
+		for (int j=0; j<n; j++){
+			id[n+j] = xM[k][j];
+			coeff[n+j] = -1;
+		}
+		CHECKED_CPX_CALL( CPXaddrows, env, lp, 0, 1, id.size(), &rhs, &sense, &matbeg, &id[0], &coeff[0], NULL, NULL );
+	}
+	}
+	
+	// 3o vincolo
+	// (ogni nodo ha un arco in entrata)
+	{
+	char sense = 'E';
+	int matbeg = 0;
+	double rhs = 1;
+	for (int i=0; i<n; i++){
+		vector<int> idy(n);
+		vector<double> coeff(n,1);
+		for (int j=0; j<n; j++){
+			idy[j] = yM[i][j];
+		}
+		CHECKED_CPX_CALL( CPXaddrows, env, lp, 0, 1, idy.size(), &rhs, &sense, &matbeg, &idy[0], &coeff[0], NULL, NULL );
+	}
+	}
+	
+	// 4o vincolo
+	// (ogni nodo ha un arco in uscita)
+	{
+	char sense = 'E';
+	int matbeg = 0;
+	double rhs = 1;
+	for (int j=0; j<n; j++){
+		vector<int> idy(n);
+		vector<double> coeff(n,1);
+		for (int i=0; i<n; i++){
+			idy[i] = yM[i][j];
+		}
+		CHECKED_CPX_CALL( CPXaddrows, env, lp, 0, 1, idy.size(), &rhs, &sense, &matbeg, &idy[0], &coeff[0], NULL, NULL );
+	}
+	}
+	
+	{
+		
+	// 5o vincolo
+	char sense = 'L';
+	int matbeg = 0;
+	double rhs = 0;
+	for (int i=0; i<n; i++){
+		for (int j=0; j<n; j++){
+			vector<int> id(2);
+			vector<double> coeff(2);
+			id[0] = xM[i][j];
+			id[1] = yM[i][j];
+			coeff[0] = 1;
+			coeff[1] = -n;
+			CHECKED_CPX_CALL( CPXaddrows, env, lp, 0, 1, 2, &rhs, &sense, &matbeg, &id[0], &coeff[0], NULL, NULL );
+		}
+	}
+	}
+	
+	
+
+	// print (debug)
+	CHECKED_CPX_CALL( CPXwriteprob, env, lp, "pr.lp", NULL );
+	/// status = CPXwriteprob (env, lp, "myprob", filetype_str);
+	
+	
+}
+
+int main (int argc, char *argv[])
+{
+	
+    if (argc != 2){
+	
+	cout << "usage: ./main filename\n";
+	exit(0);
+
+    }
+
+    ofstream SaveFile("results_TEST.txt", ios_base::app);
+    SaveFile << endl << endl << argv[1] << endl << endl;
+    SaveFile.close();
+
+    // char cc[40] = "istanze/100_rand_dataset";
+    char* c = argv[1];
+    Reader* initializator = new Reader(c);
+    
+    int test = 1;
+
+    std::chrono::system_clock::time_point start, end;
+    
+    for (int p = 1; p <= initializator->problems; p++){
+        initializator->getNextProblem(xy);
+        cout << "problema " << p << endl;
+        
+        float tc = 0.0f;
+
+	double timelimit = 1200;
+    
+	double cur_obj;
+		
+	n = initializator->nodes;
+		
+	cout << "Numero nodi: " << n << endl;
+		
+        for (int tt = 1; tt <= test; tt++){
+        
+           
+	        try
+	        {
+		        DECL_ENV( env );
+		        DECL_PROB( env, lp );
+		
+		        //n=2;
+		        //xy[][] = {{1.0,1.0},{1.0,1.0}};
+		
+		        setupLP(env, lp);
+
+			// Serve per impostare un limite di tempo al solver così che non cicli all'infinito per trovare una soluzione
+		        CPXsetdblparam(env, CPX_PARAM_TILIM, timelimit);
+			
+		        start = std::chrono::system_clock::now();
+		        // optimize
+		        CHECKED_CPX_CALL( CPXmipopt, env, lp );
+		        end = std::chrono::system_clock::now();
+		
+		        // print objval
+		        double objval;
+		        CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
+		        float elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()/1000.0f;
+		        tc += elapsed_time;
+		        // std::cout << "problem: " << p << "   test: " << tt << "   Objval: " << objval << "   time: " << elapsed_time << "s" << std::endl;
+				
+			cur_obj = objval;
+				
+		        CHECKED_CPX_CALL( CPXwriteprob, env, lp, "lel.lp", NULL);
+		
+		        //print solution (var values)
+		        int n1 = CPXgetnumcols(env, lp);
+		        if (n1 != n) { throw std::runtime_error(std::string(__FILE__) + ":" + STRINGIZE(__LINE__) + ": " + "different number of variables"); }
+		        std::vector<double> varVals;
+		        varVals.resize(n);
+		        CHECKED_CPX_CALL( CPXgetx, env, lp, &varVals[0], 0, n - 1 );
+		        /// status = CPXgetx (env, lp, x, 0, CPXgetnumcols(env, lp)-1);
+		        for ( int i = 0 ; i < n ; ++i ) {
+			        std::cout << "var in position " << i << " : " << varVals[i] << std::endl;
+		        /// to get variable name, use the RATHER TRICKY "CPXgetcolname"
+		        /// status = CPXgetcolname (env, lp, cur_colname, cur_colnamestore, cur_storespace, &surplus, 0, cur_numcols-1);
+		        }
+		        CHECKED_CPX_CALL( CPXsolwrite, env, lp, "pr.sol" );
+		        // free
+		
+		        CPXfreeprob(env, &lp);
+		        CPXcloseCPLEX(&env);
+		
+	        }
+	        catch(std::exception& e)
+	        {
+		        // cout << ">>>EXCEPTION: " << e.what() << endl;
+	        }
+	
+	    //cout << endl;
+	    }//chiudo il for dei test
+	  cout << "Av_Time " << p << ": " << tc / test << endl;
+	  cout << "Best_Val " << p << ": " << cur_obj << endl;
+          cout << endl;
+
+	  ofstream SaveFile("results_TEST.txt", ios_base::app);
+          SaveFile << p << "\t" << tc/test << "\t" << cur_obj << endl;
+          SaveFile.close();
+
+	}//chiudo il for dei problemi
+	return 0;
+}
