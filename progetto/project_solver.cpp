@@ -37,54 +37,69 @@ project_solver::project_solver(vector<vector<float> > data){
 
 float project_solver::getSimAnnealing(int multistart, bool random){
 	
-	sol = getInitialSol(random); 
+	sol = getInitialSol(random);		// Inizializzo la soluzione attuale ottenendo quella iniziale
 
-	vector<int> next;
+	vector<int> newSol;			// Vettore che mi servirà per mantenere in memoria il calcolo del vicinato eseguito da getNeigh
 	
+	double step = 1;			// Indice che mi serve per memorizaare il numero di passi eseguiti fino ad ora
+	float temp;				// Valore che utilizzo per memorizzare la temperatura
+	double n_passi = 100000.0 * n / 5;	// Valore che indica il numero di passi da eseguire, aumentano all'aumentare del numero di nodi del dataset
 
-	double step = 1;
-	float T;
-	double n_passi = 100000.0 * n / 5;
-	
-	//cout << "Start_Sol: " << evaluate(sol) << endl;	
+
+	// Ciclo while che opera finché non ha eseguito tutti i passi del caso
 
 	while (step < n_passi){
 		
-		next = getNeigh(sol,2,true);
-		float de = evaluate(sol) - evaluate(next);
-		
-		// delta è maggiore di 0 significa che è migliore next e quindi aggiorno
+		newSol = getNeigh(sol,2,true);			// Calcolo la nuova soluzione tramite la funzione getNeigh
+		float de = evaluate(sol) - evaluate(newSol);	// Vado ad effettuare la valutazione della nuova soluzione
+
+
+		// if che mi servirà per determinare se la nuova soluzione trovata è migliorativa o peggiorativa
 
 		if (de > 0){
-			sol = next;
-		}else{ // entro in questo ramo solo se de è minore di 0
+			
+			// Entrare in questo ramo significa aver trovato una nuova soluzione migliorativa tramite getNeigh, aggiorno quindi sol a newSol
 
-			//T = 1-(step 		
+			sol = newSol;
+		}else{ 
 
-			T = 1-(step/n_passi);
-			double p = exp((de)/T);
-			srand(time(NULL));
-			if (p*100 > (rand()%100) ){ // mi serve per dire se accetto la mossa peggiorativa secondo la probabilità p casuale
-				sol = next;
+			// Se invece sono entrato nel ramo else significa che la soluzione è peggiorativa. A questo punto dovrò capire se accettare o meno tale soluzione
+
+			temp = 1-(step/n_passi);	// Calcolo la temperatura come segue
+			double prob = exp((de)/temp);	// Calcolo il valore che utilizzerò per valutare se accetto la soluzione peggiorativa
+			srand(time(NULL));		// Genero il seme per ottenere il numero casuale
+
+
+			// if che mi servirà per determinare se accetto la soluzione peggiorativa o meno
+
+			if (prob*100 > (rand()%100) ){
+
+				// Se la probabilità prob calcolata è maggiore del numero random % 100 allora accetterà la soluzione peggiorativa, altrimenti non eseguo l'azione
+
+				sol = newSol;
 			}
 			
 		}
 		
-		step ++;
+		step ++; // Incremento il valore step per procedere nel ciclo
 		
 	}
 
-	
+	TSA_sol[SA_count-1] = evaluate(sol);	// Inserisco nel vettore delle soluzioni totali la soluzione corrente
+	SA_sol = evaluate(sol);			// Mi calcolo la soluzione corrente
+	MSA_sol = MSA_sol + SA_sol;		// Mi calcolo la somma di tutte le soluzioni trovate fino ad ora
 
-	TSA_sol[SA_count-1] = evaluate(sol);
-	SA_sol = evaluate(sol);
-	MSA_sol = MSA_sol + SA_sol;
+
+	// if che mi serve per capire se la soluzione attualmente calcolata è la migliore fino ad ora o meno
 
 	if(SA_sol < BSA_sol) {
 		
 		BSA_sol = SA_sol;
 
 	}
+
+
+	// if che mi serve per capire se la soluzione attualmente calcolata è la peggiore ad ora o meno
 
 	if(SA_sol >= WSA_sol) {
 		
@@ -93,33 +108,35 @@ float project_solver::getSimAnnealing(int multistart, bool random){
 	}
 
 	
-	return localSearch(sol);
+	// Come ultima operazione vado a restituire il valore restituito dalla funzione di localSearch. Tramite questa operazione vado ad effettuare una fase di intensificazione per 
+	// migliorare il risultato ottenuto durante la fase di Simulated Annealing
+
+	return localSearch(sol);		// Alla localSearch do in pasto la soluzione trovata attualmente che verrà eventualmente migliorata 
 	
 }
 
 
 float project_solver::getLocalSearch(){
 
-	return localSearch(getInitialSol(random));
+	return localSearch(getInitialSol(true));	// ritorno il risultato calcolato dalla localSearch dandole in pasto la soluzione iniziale
 
 }
-
-
 
 
 float project_solver::localSearch(vector<int> sol){
 
 
+	// Ciclo while che continuerà ad operare finché non ritornerò la soluzione
+
 	while (true){
 
-		vector<int> b_n = findBestN(sol);
-		if (evaluate(b_n) >= evaluate(sol)){	
+		vector<int> newSol = findBestN(sol);	// Calcolo il vicinato migliore tramite la funzione findBestN
+		if (evaluate(newSol) >= evaluate(sol)){	// Se newSol è peggiore o uguale a sol allora ritornerò sol
 			return evaluate(sol);
-		}else{
-			sol = b_n;
+		}else{					// Se newSol è migliore di sol allora aggiornerò sol a newSol
+			sol = newSol;
 		}
 	}
-
 }
 
 
