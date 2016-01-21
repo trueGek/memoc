@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "S_Annealing.h"
+#include "project_solver.h"
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -14,26 +14,30 @@
 
 using namespace std;
 
-int for_random = 0;
+// Definizione delle variabili globali utili per il calcolo
 
-double SA_sol = 0;
-double BSA_sol = DBL_MAX;
-double WSA_sol = DBL_MIN;
-double MSA_sol = 0;
-vector<double> TSA_sol (10);
-int SA_count = 1;  
+int for_random = 0;		// Variabile che mi serve per il calcolo dei valori random nei vari metodi
 
-S_Annealing::S_Annealing(vector<vector<float> > data){
+double SA_sol = 0;		// Soluzione corrente del siumlated annealing
+double BSA_sol = DBL_MAX;	// Miglior soluzione trovata durante l'elaborazione per uno specifico dataset
+double WSA_sol = DBL_MIN;	// Peggior soluzione trovata durante l'elaborazione per uno specifico dataset
+double MSA_sol = 0;		// Valore medio di tutte le soluzioni trovate durante l'elaborazione per uno specifico dataset
+vector<double> TSA_sol (10);	// Vettore delle soluzioni trovate per uno specifico dataset, utile per il calcolo della varianza
+int SA_count = 1;  		// Mi serve per individuare a quale test del Simulated Annealing per uno specifico dataset sono arrivato
+
+project_solver::project_solver(vector<vector<float> > data){
 	
-	n = data.size();
-	xy.resize(n);
-	xy = data;
+	// Definizione delle variabili che utilizzerò all'interno del solver
+
+	n = data.size();	// Dimensione del dataset
+	xy.resize(n);		// Matrice delle distanze - Definizione dimensioni
+	xy = data;		// Matrice delle distanze - Definizione elementi
 
 }
 
-float S_Annealing::getSolSA(int multistart, bool random){
+float project_solver::getSimAnnealing(int multistart, bool random){
 	
-	sol = getInitialSol(random);
+	sol = getInitialSol(random); 
 
 	vector<int> next;
 	
@@ -46,8 +50,6 @@ float S_Annealing::getSolSA(int multistart, bool random){
 
 	while (step < n_passi){
 		
-
-		//next = findBestNSA(sol);
 		next = getNeigh(sol,2,true);
 		float de = evaluate(sol) - evaluate(next);
 		
@@ -96,7 +98,7 @@ float S_Annealing::getSolSA(int multistart, bool random){
 }
 
 
-float S_Annealing::getSolLS(){
+float project_solver::getLocalSearch(){
 
 	return localSearch(getInitialSol(random));
 
@@ -105,7 +107,7 @@ float S_Annealing::getSolLS(){
 
 
 
-float S_Annealing::localSearch(vector<int> sol){
+float project_solver::localSearch(vector<int> sol){
 
 
 	while (true){
@@ -121,9 +123,7 @@ float S_Annealing::localSearch(vector<int> sol){
 }
 
 
-vector<int> S_Annealing::findBestN(vector<int> sol){
-
-    //cout << "Allerta DUE!!!" << endl; 
+vector<int> project_solver::findBestN(vector<int> sol){
 
     int e = n+1;
     vector<int> neigh = sol;
@@ -146,40 +146,7 @@ vector<int> S_Annealing::findBestN(vector<int> sol){
     return neigh;
 }
 
-
-vector<int> S_Annealing::findBestNSA(vector<int> sol){
-
-    //cout << "Allerta!!!" << endl; 
-
-    int e = n+1;
-    vector<int> neigh = sol;
-    //cout << "prima della modifica\t";
-    //printSol(neighbor);
-    int ntest = 0;
-    for (int s1 = 1; s1 < e-2; s1++){  //non serve che scambio il primo e l'ultimo elemento
-        for (int s2 = s1+1; s2 < e-1; s2++){
-            //valuto il vicino scambiando s1s2
-            neigh = sol;
-            for (int i = s1, j = s2; i < j; i++, j--){
-                float ppp = neigh[i];
-                neigh[i] = sol[j];
-                neigh[j] = ppp;
-            }
-            ntest ++;
-            //cout << s1 << ' ' << s2 << ' ' << evaluate(neighbor)<< endl;
-            //if (s1 ==2) return neighbor;
-            //printSol(neighbor);
-            if (evaluate(neigh) < evaluate(sol)){
-                //bestNeighbor = neighbor;
-                //cout << "vicini analizzati: " << ntest << endl;
-                return neigh;
-            }
-        }
-    }
-    return getNeigh(neigh, 2, true);
-}
-
-vector<int> S_Annealing::getInitialSol(bool random){
+vector<int> project_solver::getInitialSol(bool random){
 
 	int n2 = n;
 	vector<int> sol = vector<int>(n2+1);
@@ -214,7 +181,7 @@ vector<int> S_Annealing::getInitialSol(bool random){
 	
 }
 
-vector<int> S_Annealing::getNeigh(vector<int> node, int k, bool random){
+vector<int> project_solver::getNeigh(vector<int> node, int k, bool random){
 	
 
 	if ( k < 2 ){
@@ -261,7 +228,7 @@ vector<int> S_Annealing::getNeigh(vector<int> node, int k, bool random){
 }
 
 
-float S_Annealing::evaluate(vector<int> & node){
+float project_solver::evaluate(vector<int> & node){
 	
 	float dist = 0;
 	
@@ -277,7 +244,7 @@ float S_Annealing::evaluate(vector<int> & node){
 
 
 /*
-float S_Annealing::incEvaluate(vector<int> & node, int ub, int lb){
+float project_solver::incEvaluate(vector<int> & node, int ub, int lb){
 
 	float dist = 0;
 
@@ -316,8 +283,6 @@ main(int argc, char* argv[]){
 	int x = 0;
 
 	int* p_x = &x;
-
-	// float f = solver->getSolution(1,true);
 	
 	// cout << "Risultato ==> " << f << endl;
 
@@ -349,11 +314,11 @@ main(int argc, char* argv[]){
         	
 		for (int tt = 1; tt <= test; tt++){         		
 
-			S_Annealing* solver = new S_Annealing(xy);
+			project_solver* solver = new project_solver(xy);
 		        start = std::chrono::system_clock::now();
-			float sol = solver->getSolSA(1,true);
+			float sol = solver->getSimAnnealing(1,true);
 			
-			//float sol = solver->getSolLS();		        
+			//float sol = solver->getLocalSearch();		        
 			med_sol = med_sol + sol;
 			end = std::chrono::system_clock::now();  
 			float cur_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()/1000.0f;
