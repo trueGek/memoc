@@ -25,6 +25,9 @@ double MSA_sol = 0;		// Valore medio di tutte le soluzioni trovate durante l'ela
 vector<double> TSA_sol (10);	// Vettore delle soluzioni trovate per uno specifico dataset, utile per il calcolo della varianza
 int SA_count = 1;  		// Mi serve per individuare a quale test del Simulated Annealing per uno specifico dataset sono arrivato
 
+
+/* ---------------------- Metodi comuni ai solver Simulated Annealing e Local Search ---------------------- */
+
 project_solver::project_solver(vector<vector<float> > data){
 	
 	// Definizione delle variabili che utilizzerò all'interno del solver
@@ -34,6 +37,118 @@ project_solver::project_solver(vector<vector<float> > data){
 	xy = data;		// Matrice delle distanze - Definizione elementi
 
 }
+
+
+float project_solver::evaluate(vector<int> & node){
+	
+	float dist = 0;		// Variabile per il calcolo delle distanze nella soluzione trovata
+	
+	for(int i = 0; i < node.size() -1; i++){
+		
+		dist += xy[node[i]][node[i+1]];		// La distanza totale è uguale alla distanza fino ad ora calcolata più la distanza tra l'elementi in posizione i e i+1
+		
+	}
+	
+	return dist;		// Infine ritorno il valore dist calcolato all'interno del ciclo for
+	
+}
+
+
+vector<int> project_solver::getInitialSol(bool random){
+
+	vector<int> sol = vector<int>(n+1); 	// Definisco il vettore delle soluzioni come un vettore di lunghezza n+1
+	
+	
+	// Ciclo for per l'inizializzazione del vettore sol
+
+	for (int i = 0; i < n; i++){
+		sol[i] = i;
+	}
+
+	sol[n+1]=sol[0];			// Definisco infine la posizione n+1 di sol a 0 poiché il percorso deve ritornare al punto di partenza
+	
+	if(!random){
+		return sol;			
+	}
+	
+	srand(time(NULL)+for_random);		// Definisco il seme per il calcolo dei valori casuali successivi
+	for_random = for_random +1;
+	
+
+	// Ciclo for che andrà a scambiare n*2 volte delle coppie di elementi casuali all'interno del vettore delle soluzioni
+
+	for (int i = 0; i < 2*n; i++){
+		
+		int pos1 = int( rand()%(n-1) ) +1;// Calcolo la prima posizione 
+		int pos2 = int( rand()%(n-1) ) +1;// Calcolo la seconda posizione
+		
+		// Operazioni per lo scampio di posto degli elementi situati nelle posizioni pos1 e pos2
+
+		int temp = sol[pos1];
+		sol[pos1] = sol[pos2];
+		sol[pos2] = temp;
+		
+	}
+}
+
+
+/* ---------------------- Metodi relativi alla Simulated Annealing ---------------------- */
+
+vector<int> project_solver::getNeigh(vector<int> node, int k, bool random){
+	
+
+	// if che mi assicura che non ci siano valori di k < 2, nel qual caso modifica il valore proprio a 2
+
+	if ( k < 2 ){
+		k = 2;
+	}
+
+	vector<int> newV = node;		// Definisce un nuovo vettore delle soluzioni uguale a quello dato in input
+
+	
+	// if che, nel caso in cui rand sia true, va ad inizializzarmi il seme per il calcolo dei valori random
+
+	if (random){
+		srand(time(NULL)+for_random);
+		for_random = for_random +1;
+	}else{
+		srand(0);
+	}
+	
+
+	int pos1, pos2;				// Definisco due nuove variabili che mi serviranno per decidere i punti di scambio
+
+
+	// Ciclo while che opera finché pos1 e pos2 sono uguali. Quando sono diverse termina
+
+	do{
+		pos1 = int( rand()%(n-1) ) +1;	// Primo valore attribuito
+		pos2 = int( rand()%(n-1) ) +1;	// Secondo valore attribuito
+
+	}while(pos1 == pos2);
+		
+	
+	// if che mi assicura che pos1 sia minore o uguale di pos2
+
+	if(pos1>pos2){
+		int temp = pos2;
+		pos2 = pos1;
+		pos1 = temp;	
+	}
+		
+
+	// for che mi va ad effettuare l'inversione di tutti gli elementi contenuti nell'intervallo pos1 - pos2
+
+	for (int i = pos1+1, j = pos2-1; i < j ; i++, j--){
+		newV[i] = node[j];
+		newV[j] = node[i];			
+	}
+
+
+	return newV;				// Ritorno in output il nuovo vettore calcolato dal nostro metodo
+
+}
+
 
 float project_solver::getSimAnnealing(int multistart, bool random){
 	
@@ -67,8 +182,8 @@ float project_solver::getSimAnnealing(int multistart, bool random){
 
 			temp = 1-(step/n_passi);	// Calcolo la temperatura come segue
 			double prob = exp((de)/temp);	// Calcolo il valore che utilizzerò per valutare se accetto la soluzione peggiorativa
-			srand(time(NULL));		// Genero il seme per ottenere il numero casuale
-
+			srand(time(NULL)+for_random);		// Genero il seme per ottenere il numero casuale
+			for_random = for_random + 1;
 
 			// if che mi servirà per determinare se accetto la soluzione peggiorativa o meno
 
@@ -116,10 +231,28 @@ float project_solver::getSimAnnealing(int multistart, bool random){
 }
 
 
-float project_solver::getLocalSearch(){
+/* ---------------------- Metodi relativi alla Local Search ---------------------- */
 
-	return localSearch(getInitialSol(true));	// ritorno il risultato calcolato dalla localSearch dandole in pasto la soluzione iniziale
+vector<int> project_solver::findBestN(vector<int> sol){
 
+    vector<int> neigh = sol;
+
+    for (int s1 = 1; s1 < n-1; s1++){  
+        for (int s2 = s1+1; s2 < n; s2++){
+
+            neigh = sol;
+            for (int i = s1, j = s2; i < j; i++, j--){
+                float ppp = neigh[i];
+                neigh[i] = sol[j];
+                neigh[j] = ppp;
+            }
+
+            if (evaluate(neigh) < evaluate(sol)){
+                return neigh;
+            }
+        }
+    }
+    return neigh;
 }
 
 
@@ -140,125 +273,14 @@ float project_solver::localSearch(vector<int> sol){
 }
 
 
-vector<int> project_solver::findBestN(vector<int> sol){
+float project_solver::getLocalSearch(){
 
-    int e = n+1;
-    vector<int> neigh = sol;
+	return localSearch(getInitialSol(true));	// ritorno il risultato calcolato dalla localSearch dandole in pasto la soluzione iniziale
 
-    for (int s1 = 1; s1 < e-2; s1++){  //non serve che scambio il primo e l'ultimo elemento
-        for (int s2 = s1+1; s2 < e-1; s2++){
-            //valuto il vicino scambiando s1s2
-            neigh = sol;
-            for (int i = s1, j = s2; i < j; i++, j--){
-                float ppp = neigh[i];
-                neigh[i] = sol[j];
-                neigh[j] = ppp;
-            }
-
-            if (evaluate(neigh) < evaluate(sol)){
-                return neigh;
-            }
-        }
-    }
-    return neigh;
-}
-
-vector<int> project_solver::getInitialSol(bool random){
-
-	int n2 = n;
-	vector<int> sol = vector<int>(n2+1);
-	
-	for (int i = 0; i < n2; i++){
-		sol[i] = i;
-	}
-	sol[n2+1]=sol[0];
-	
-	if(!random){
-		return sol;
-	}
-	
-	srand(time(NULL)+for_random);
-
-	for_random = for_random +1;
-	
-	for (int i = 0; i < 2*n2; i++){
-		
-		int s1 = int( rand()%(n2-1) ) +1;
-		int s2 = int( rand()%(n2-1) ) +1;
-	
-//		cout << s1 << " " << s2 << endl;
-		
-		int temp = sol[s1];
-		
-		sol[s1] = sol[s2];
-		sol[s2] = temp;
-		
-	}
-
-	
-}
-
-vector<int> project_solver::getNeigh(vector<int> node, int k, bool random){
-	
-
-	if ( k < 2 ){
-		k = 2;
-	}
-	
-	vector<int> newV = node;
-
-	if (random){
-		srand(time(NULL)+for_random);
-		for_random = for_random +1;
-		//srand(time(NULL));
-	}else{
-		srand(0);
-	}
-	
-
-		int s1, s2;
-		do{
-			s1 = int( rand()%(n-1) ) +1;
-			s2 = int( rand()%(n-1) ) +1;
-
-		}while(s1 == s2);
-		
-		// Se l'indice s1 è maggiore dell'indice s2 vado a scambiarli in modo che siano in ordine
-	
-		if(s1>s2){
-			int temp = s2;
-			s2 = s1;
-			s1 = temp;	
-		}
-		
-		for (int i = s1+1, j = s2-1; i < j ; i++, j--){
-			newV[i] = node[j];
-			newV[j] = node[i];			
-		}
-
-
-	return newV;
-	
-// 2-opt
-	
-	
 }
 
 
-float project_solver::evaluate(vector<int> & node){
-	
-	float dist = 0;
-	
-	for(int i = 0; i < node.size() -1; i++){
-		
-		dist += xy[node[i]][node[i+1]];
-		
-	}
-	
-	return dist;
-	
-}
-
+/* ---------------------- Metodi scartati ---------------------- */
 
 /*
 float project_solver::incEvaluate(vector<int> & node, int ub, int lb){
@@ -276,6 +298,8 @@ float project_solver::incEvaluate(vector<int> & node, int ub, int lb){
 }
 */
 
+
+/* ---------------------- MAIN ---------------------- */
 
 main(int argc, char* argv[]){	
         
@@ -296,17 +320,11 @@ main(int argc, char* argv[]){
 	Reader* initializator = new Reader(c);
 	
 	int test = 10;
-	
 	int x = 0;
-
 	int* p_x = &x;
-	
-	// cout << "Risultato ==> " << f << endl;
 
 	std::chrono::system_clock::time_point start, end;
     
-	// cout << "Risultati parziali: " << endl;
-
     	for (int p = 1; p <= initializator->problems; p++){
 
 		SA_sol = 0;
