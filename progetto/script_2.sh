@@ -1,7 +1,7 @@
 echo 
 echo "RAND DATASET"
-for i in `seq 100 10 100`;
-do "Allready done" 
+for i in `seq 10 10 100`;
+do ./main istanze/${i}_rand_dataset 
 done
 
 echo "CLUSTER DATASET"
