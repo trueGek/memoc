@@ -30,7 +30,7 @@ int SA_count = 1;  		// Mi serve per individuare a quale test del Simulated Anne
 
 project_solver::project_solver(vector<vector<float> > data){
 	
-	// Definizione delle variabili che utilizzerò all'interno del solver
+	// Dichiarazione delle variabili che utilizzerò all'interno del solver
 
 	n = data.size();	// Dimensione del dataset
 	xy.resize(n);		// Matrice delle distanze - Definizione dimensioni
@@ -116,7 +116,7 @@ vector<int> project_solver::getNeigh(vector<int> node, int k, bool random){
 	}
 	
 
-	int pos1, pos2;				// Definisco due nuove variabili che mi serviranno per decidere i punti di scambio
+	int pos1, pos2;				// Dichiaro due nuove variabili che mi serviranno per decidere i punti di scambio
 
 
 	// Ciclo while che opera finché pos1 e pos2 sono uguali. Quando sono diverse termina
@@ -332,7 +332,7 @@ main(int argc, char* argv[]){
 	SaveFile.close();	
 
 	char* c = argv[1];					// Prendo il nome del file in input
-	Reader* initializator = new Reader(c);			// Do in pasto al reader il nuovo file in input
+	Reader* dataReader = new Reader(c);			// Do in pasto al reader il nuovo file in input
 	
 	int test = 10;						// Numero di test da effettuare per ogni dataset
 
@@ -341,7 +341,7 @@ main(int argc, char* argv[]){
 
 	// Cicli for principali, mi serviranno per andare a calcolare le varie soluzioni che otterrò dai vari dataset
 
-    	for (int p = 1; p <= initializator->problems; p++){	// Il primo ciclo for opererà per p volte con p <= al numero di problemi per ogni dataset
+    	for (int curP = 1; curP <= dataReader->problems; curP++){	// Il primo ciclo for opererà per curP volte con curP <= al numero di problemi per ogni dataset
 
 		SA_sol = 0;					// Azzeramento della soluzione corrente del Simulated Annealing
 		BSA_sol = DBL_MAX;				// Azzeramento della migliore soluzione del Simulated Annealing
@@ -350,22 +350,22 @@ main(int argc, char* argv[]){
 		TSA_sol.clear();				// Azzeramento del vettore delle soluzioni ottenute dal Simulated Annealing
 		SA_count = 1;					// Azzeramento della del contatore che utilizzerò nel Simulated Annealing
 
-		int n_nodes = initializator->nodes;		// Definisco il numero di nodi del problema corrente ottenendolo dall'inizializator
-		vector<vector<float> > xy;			// Definisco il vettore xy
-     	 	initializator->getNextProblem(xy);		// Valorizzo il vettore xy con i valori del nuovo problema ottenuto dall'inizializator
-		float total_time = 0.0f;      	  		// Definizione e valorizzazione del tempo totale impiegato per la risoluzione di un dataset: somma di tutti i tempi
+		int n_nodes = dataReader->nodes;		// Definisco il numero di nodi del problema corrente ottenendolo dal dataReader
+		vector<vector<float> > xy;			// Dichiaro il vettore xy
+     	 	dataReader->getNextProblem(xy);			// Valorizzo il vettore xy con i valori del nuovo problema ottenuto dall dataReader
+		float total_time = 0.0f;      	  		// Dichiarazione e valorizzazione del tempo totale impiegato per la risoluzione di un dataset: somma di tutti i tempi
 
 		double best_sol = DBL_MAX;			// Definizione di best_sol ovvero la migliore soluzione globale trovata fino ad un dato momento 
 		double worst_sol = DBL_MIN;			// Definizione di worst_sol ovvero la peggiore soluzione globale trovata fino ad un dato momento
 		double med_sol = 0;				// Definizione di med_sol ovvero la media delle soluzioni trovate fino a questo momento
-		vector<double> total_sol (10);  		// Definizione del vettore di tutte le soluzioni trovate fino ad ora
+		vector<double> total_sol (10);  		// Dichiarazione del vettore di tutte le soluzioni trovate fino ad ora
 
 		// Stampe per la visualizzazione dei risultati a console
 
-		cout << "problema " << p << endl;		
+		cout << "problema " << curP << endl;		
 		cout << "Numero nodi: " << n_nodes << endl;
         	
-		for (int tt = 1; tt <= test; tt++){				// Il secondo ciclo for opererà per tt volte con tt <= al numero di test da effettuare per ogni dataset
+		for (int curT = 1; curT <= test; curT++){			// Il secondo ciclo for opererà per curT volte con curT <= al numero di test da effettuare per ogni dataset
 
 			project_solver* solver = new project_solver(xy);	// Definisco un nuovo solver su cui poi opererò per ottenere i risultati dei due metodi implementati	
 		        
@@ -382,7 +382,7 @@ main(int argc, char* argv[]){
 			total_time = total_time + cur_time;			// Calcolo del tempo totale
 			
 			SA_count++;						// Incremento il numero delle iterazioni totali da effettuare per un dataset
-			total_sol[tt-1] = sol;					// Inserisco nel vettore total_sol la soluzione corrente
+			total_sol[curT-1] = sol;					// Inserisco nel vettore total_sol la soluzione corrente
 
 
 			// Vado a calcolare la soluzione migliore trovata fino ad ora
@@ -433,20 +433,20 @@ main(int argc, char* argv[]){
 		// Operazioni di output a console per visualizzare i dati
 
 		cout << endl;
-		cout << "Average_Time " << p << ": " << total_time << endl;
+		cout << "Average_Time " << curP << ": " << total_time << endl;
 		
 		cout << endl;
 
-		cout << "Best_Sol_SA " << p << ": " << BSA_sol << endl;
-		cout << "Worst_Sol_SA " << p << ": " << WSA_sol << endl;
-		cout << "Average_Sol_SA " << p << ": " << MSA_sol<< endl;
-		cout << "Variance_SA " << p << ": " << Variance_SA << endl;
+		cout << "Best_Sol_SA " << curP << ": " << BSA_sol << endl;
+		cout << "Worst_Sol_SA " << curP << ": " << WSA_sol << endl;
+		cout << "Average_Sol_SA " << curP << ": " << MSA_sol<< endl;
+		cout << "Variance_SA " << curP << ": " << Variance_SA << endl;
 		cout << endl;	
 
-		cout << "Best_Sol " << p << ": " << best_sol << endl;
-		cout << "Worst_Sol " << p << ": " << worst_sol << endl;
-		cout << "Average_Sol " << p << ": " << med_sol << endl;
-		cout << "Variance " << p << ": " << Variance << endl;
+		cout << "Best_Sol " << curP << ": " << best_sol << endl;
+		cout << "Worst_Sol " << curP << ": " << worst_sol << endl;
+		cout << "Average_Sol " << curP << ": " << med_sol << endl;
+		cout << "Variance " << curP << ": " << Variance << endl;
 		cout << endl;
 			
 		cout << "*************" << endl;
@@ -456,7 +456,7 @@ main(int argc, char* argv[]){
 		// Operazioni per la scrittura su file dei dati calcolati
 
 		ofstream SaveFile( "results_new_vers.txt", ios_base::app);
-		SaveFile << p << "\t"  << total_time << "\t" << BSA_sol << "\t" << WSA_sol << "\t" << MSA_sol<< "\t" << Variance_SA << "\t" <<best_sol << "\t" << worst_sol << "\t" << med_sol << "\t" << Variance << endl;
+		SaveFile << curP << "\t"  << total_time << "\t" << BSA_sol << "\t" << WSA_sol << "\t" << MSA_sol<< "\t" << Variance_SA << "\t" <<best_sol << "\t" << worst_sol << "\t" << med_sol << "\t" << Variance << endl;
 		SaveFile.close();
 
 	}

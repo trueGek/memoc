@@ -212,88 +212,76 @@ void setupLP(CEnv env, Prob lp)
 int main (int argc, char *argv[])
 {
 	
-    if (argc != 2){
-	
+    if (argc != 2)
+    {
 	cout << "usage: ./main filename\n";
 	exit(0);
-
     }
+
+
+    // Vado ad inserire nel file di output le informazioni relative a quale dataset sto analizzando
 
     ofstream SaveFile("results_TEST.txt", ios_base::app);
     SaveFile << endl << endl << argv[1] << endl << endl;
     SaveFile.close();
 
-    // char cc[40] = "istanze/100_rand_dataset";
-    char* c = argv[1];
-    Reader* initializator = new Reader(c);
-    
-    int test = 10;
 
-    std::chrono::system_clock::time_point start, end;
-    
-    for (int p = 1; p <= initializator->problems; p++){
-        initializator->getNextProblem(xy);
-        cout << "problema " << p << endl;
-        
-        float tc = 0.0f;
+    // char cc[40] = "istanze/100_rand_dataset";	// Comando per dare in input uno specifico dataset
 
-	double timelimit = 1200;
+    char* c = argv[1];					// Prendo il nome del file in input
+    Reader* dataReader = new Reader(c);			// Do in pasto al reader il nuovo file in input
     
-	double cur_obj;
-		
-	n = initializator->nodes;
-		
+    int test = 10;					// Numero di test da effettuare per ogni dataset
+
+    std::chrono::system_clock::time_point start, end;	// Mi definisco lo strumento per rilevare il tempo
+    
+
+    // Cicli for principali, mi servono per andare a calcolare le varie soluzioni che otterrò dai vari dataset utilizzando le funzioni di CPLEX
+
+    for (int curP = 1; curP <= dataReader->problems; curP++)	// Questo ciclo for serve per scorrere tutti i problemi per ogni tipologia di dataset
+    {
+        dataReader->getNextProblem(xy);			// Valorizzo il vettore xy con i valori del nuovo problema ottenuto da dataReader
+        float total_time = 0.0f;			// Definizione del tempo totale impiegato per la risoluzione di un dataset: somma tutti i tempi di esecuzione. All'inizio è 0
+	double timelimit = 1200;			// Definizione del tempo massimo che la funzione CPLEX può ciclare per trovare una soluzione
+	double cur_sol;					// Dichiarazione di una variabile che mi servirà per tenere traccia di qual'è la soluzione del dataset corrente
+	n = dataReader->nodes;				// Definisco il numero di nodi del problema corrente ottenendolo dal dataReader
+	
+
+	// Stampe per la visualizzazione dei risultati a console
+
+	cout << "problema " << curP << endl;	
 	cout << "Numero nodi: " << n << endl;
 		
-        for (int tt = 1; tt <= test; tt++){
+        for (int curT = 1; curT <= test; curT++)	// Questo secondo ciclo for serve per eseguire tutti i test previsti per ogni problema di ogni dataset
+	{
         
            
 	        try
 	        {
 		        DECL_ENV( env );
-		        DECL_PROB( env, lp );
-		
-		        //n=2;
-		        //xy[][] = {{1.0,1.0},{1.0,1.0}};
-		
+		        DECL_PROB( env, lp );		
 		        setupLP(env, lp);
 
-			// Serve per impostare un limite di tempo al solver così che non cicli all'infinito per trovare una soluzione
-		        CPXsetdblparam(env, CPX_PARAM_TILIM, timelimit);
+		        CPXsetdblparam(env, CPX_PARAM_TILIM, timelimit);	// Sto dando al CPLEX un limite di tempo massimo per trovare la soluzione del problema corrente. Superato tale limite restituirà quel che ha trovato
 			
-		        start = std::chrono::system_clock::now();
-		        // optimize
-		        CHECKED_CPX_CALL( CPXmipopt, env, lp );
-		        end = std::chrono::system_clock::now();
-		
-		        // print objval
-		        double objval;
-		        CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
-		        float elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()/1000.0f;
-		        tc += elapsed_time;
-		        // std::cout << "problem: " << p << "   test: " << tt << "   Objval: " << objval << "   time: " << elapsed_time << "s" << std::endl;
+		        start = std::chrono::system_clock::now();		// Inizio a rilevare il tempo
+
+		        CHECKED_CPX_CALL( CPXmipopt, env, lp );			// Richiamo la funzione di CPLEX per cui trovare l'ottimo del problema corrente
+
+		        end = std::chrono::system_clock::now();			// Interrompo la rilevazione del tempo
+
+		        double sol;						// Dichiaro variabile che definirò poi con l'ottimo trovato da CPLEX
+		        CHECKED_CPX_CALL( CPXgetobjval, env, lp, &sol );	// Estraggo l'ottimo trovato da CPLEX
+
+		        float cur_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count()/1000.0f;	// Calcolo del tempo corrente
+		        total_time += cur_time;					// Calcolo del tempo totale
 				
-			cur_obj = objval;
+			cur_sol = sol;						// Imposto la soluzione corrente a sol
 				
-		        CHECKED_CPX_CALL( CPXwriteprob, env, lp, "lel.lp", NULL);
+		        CHECKED_CPX_CALL( CPXwriteprob, env, lp, "log_file.lp", NULL);	// Mi salvo il file di log
 		
-		        //print solution (var values)
-		        int n1 = CPXgetnumcols(env, lp);
-		        if (n1 != n) { throw std::runtime_error(std::string(__FILE__) + ":" + STRINGIZE(__LINE__) + ": " + "different number of variables"); }
-		        std::vector<double> varVals;
-		        varVals.resize(n);
-		        CHECKED_CPX_CALL( CPXgetx, env, lp, &varVals[0], 0, n - 1 );
-		        /// status = CPXgetx (env, lp, x, 0, CPXgetnumcols(env, lp)-1);
-		        for ( int i = 0 ; i < n ; ++i ) {
-			        std::cout << "var in position " << i << " : " << varVals[i] << std::endl;
-		        /// to get variable name, use the RATHER TRICKY "CPXgetcolname"
-		        /// status = CPXgetcolname (env, lp, cur_colname, cur_colnamestore, cur_storespace, &surplus, 0, cur_numcols-1);
-		        }
-		        CHECKED_CPX_CALL( CPXsolwrite, env, lp, "pr.sol" );
-		        // free
-		
-		        CPXfreeprob(env, &lp);
-		        CPXcloseCPLEX(&env);
+		        CPXfreeprob(env, &lp);					
+		        CPXcloseCPLEX(&env);					 
 		
 	        }
 	        catch(std::exception& e)
@@ -301,16 +289,23 @@ int main (int argc, char *argv[])
 		        // cout << ">>>EXCEPTION: " << e.what() << endl;
 	        }
 	
-	    //cout << endl;
-	    }//chiudo il for dei test
-	  cout << "Av_Time " << p << ": " << tc / test << endl;
-	  cout << "Best_Val " << p << ": " << cur_obj << endl;
+
+	  }
+
+
+	  // Stampa a console dei valori trovati
+
+	  cout << "Av_Time " << curP << ": " << total_time / test << endl;
+	  cout << "Best_Val " << curP << ": " << cur_sol << endl;
           cout << endl;
 
+
+	  // Salvataggio su results_cplex.txt dei risultati del solver
+
 	  ofstream SaveFile("results_TEST.txt", ios_base::app);
-          SaveFile << p << "\t" << tc/test << "\t" << cur_obj << endl;
+          SaveFile << curP << "\t" << total_time/test << "\t" << cur_sol << endl;
           SaveFile.close();
 
-	}//chiudo il for dei problemi
+	}
 	return 0;
 }

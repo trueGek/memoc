@@ -1,0 +1,12 @@
+/******************** Stampa delle variabili ************************/
+
+		        //print solution (var values)
+		        int n1 = CPXgetnumcols(env, lp);
+		        if (n1 != n) { throw std::runtime_error(std::string(__FILE__) + ":" + STRINGIZE(__LINE__) + ": " + "different number of variables"); }
+		        std::vector<double> varVals;
+		        varVals.resize(n);
+		        CHECKED_CPX_CALL( CPXgetx, env, lp, &varVals[0], 0, n - 1 );
+		        for ( int i = 0 ; i < n ; ++i ) {
+			        std::cout << "var in position " << i << " : " << varVals[i] << std::endl;
+		        }
+		        CHECKED_CPX_CALL( CPXsolwrite, env, lp, "pr.sol" );
