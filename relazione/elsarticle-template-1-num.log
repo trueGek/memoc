@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  26 JAN 2016 16:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  26 JAN 2016 16:42
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -450,7 +450,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 173--174
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 178--180
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 189--190
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--195
 
  []
 
@@ -469,7 +479,7 @@ No file elsarticle-template-1-num.bbl.
 Here is how much of TeX's memory you used:
  3496 strings out of 493698
  41393 string characters out of 3144406
- 108186 words of memory out of 3000000
+ 107186 words of memory out of 3000000
  6762 multiletter control sequences out of 15000+200000
  17270 words of font info for 45 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -487,7 +497,7 @@ blic/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
 uper/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm
 1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti1000.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (5 pages, 221903 bytes).
+Output written on elsarticle-template-1-num.pdf (5 pages, 221910 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
