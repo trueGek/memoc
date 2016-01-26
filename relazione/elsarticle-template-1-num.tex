@@ -77,6 +77,9 @@
 
 \usepackage[italian]{babel}
 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
 \journal{Journal Name}
 
 \begin{document}
@@ -133,20 +136,65 @@ Il progetto del corso di Metodi e Modelli per l'Ottimizzazione Combinatoria cons
 %% main text
 \section{Modello del problema}
 \label{S:1}
+Il problema oggetto del progetto pu\'o essere formulato come un problema di ottimizzazione su reti di flusso partendo quindi da un grafo G = (N,A). Scegliendo arbitrariamente un nodo di partenza 0 $\in$ N impostiamo ad $\mid$N$\mid$ il flusso uscente da esso in modo tale che venga spinto verso altri nodi. Tale operazione ha per\'o dei vincoli ovvero ciascun nodo, eccetto l'origine, ricever\'a una e una sola unit\'a di flusso, ogni nodo sia visitato una e una sola volta e che il costo del cammino, in termini di pesi c{\tiny ij}, sia minimo.
 
-Maecenas \cite{Smith:2012qr} fermentum \cite{Smith:2013jd} urna ac sapien tincidunt lobortis. Nunc feugiat faucibus varius. Ut sed purus nunc. Ut eget eros quis lectus mollis pharetra ut in tellus. Pellentesque ultricies velit sed orci pharetra et fermentum lacus imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse commodo ultrices mauris, condimentum hendrerit lorem condimentum et. Pellentesque urna augue, semper et rutrum ac, consequat id quam. Proin lacinia aliquet justo, ut suscipit massa commodo sit amet. Proin vehicula nibh nec mauris tempor interdum. Donec orci ante, tempor a viverra vel, volutpat sed orci.
+\subsection{Il modello nella Programmazione Lineare Intera}
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque quis interdum velit. Nulla tincidunt sem quis nisi molestie nec hendrerit nulla interdum. Nunc at lectus at neque dapibus dapibus sit amet in massa. Nam ut nisl in diam consectetur dignissim. Sed lacinia diam id nunc suscipit vitae semper lorem semper. In vehicula velit at tortor fringilla elementum aliquam erat blandit. Donec pretium libero et neque vehicula blandit. Curabitur consequat interdum sem at ultrices. Sed at tincidunt metus. Etiam vulputate, lacus eget fermentum posuere, ante mi dignissim augue, et ultrices felis tortor sed nisl.
+Il problema può essere formalizzato con il seguente modello di programmazione lineare intera. Avremo quindi:
+\\
+
+\begin{large}
+\textbf{Insiemi}
+\end{large}
 
 \begin{itemize}
-\item Prova Elenco Puntato
-\item Prova Elenco Puntato
+\item \textbf{N:} nodi del grafo, rappresentano le posizioni dei fori da realizzare
+\item \textbf{A:} insieme degli archi (i,j) con i e j $\in$ N. Essi rappresentano il tragitto per spostarsi dal nodo i al nodo j\\
+
 \end{itemize}
 
+\begin{large}
+\textbf{Parametri}
+\end{large}
+
+\begin{itemize}
+\item \textbf{c{\tiny ij}:} tempo impiegato per spostarsi dal nodo i al nodo j con i e j $\in$ N e l'arco (i,j) $\in$ A.
+\item \textbf{0:} nodo di partenza del cammino $\in$ N.\\
+
+\end{itemize}
+
+
+\begin{large}
+\textbf{Variabili decisionali}
+\end{large}
+
+\begin{itemize}
+\item \textbf{x{\tiny ij}:} unità di flusso trasportate da i a j con i e j  $\in$ N e l'arco (i,j) $\in$ A.
+\item \textbf{y{\tiny ij}:} indica l'utilizzo dell'arco (i,j), 1 se viene utilizzato, 0 altrimenti. Avremo che i e j  $\in$ N e l'arco (i,j) $\in$ A.\\
+
+\end{itemize}
+
+\begin{large}
+\textbf{Vincoli}
+\end{large}
+
+Il modello, a questo punto, prevede un totale di cinque vincoli differenti che possono essere indicati come segue:
+
+
 \begin{enumerate}
-\item Numbered list item one
-\item Numbered list item two
+\item Il flusso uscente da x{\tiny 0j} deve essere massimo, cioè $\mid$N$\mid$
+\item Ogni nodo utilizza al massimo una unità di flusso, tranne il nodo di partenza
+\item Ogni nodo ha un solo arco in entrata
+\item Ogni nodo ha un solo arco in uscita
+\item Se vi è un'unità di flusso trasportata da i a j deve di conseguenza esserci un arco che va da i a j\\
 \end{enumerate}
+
+\begin{large}
+\textbf{Modello}
+\end{large}
+
+
+
 
 \subsection{Subsection One}
 
