@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  26 JAN 2016 16:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  27 JAN 2016 18:38
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -459,31 +459,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 189--190
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--195
-
- []
-
-[2] <placeholder.jpg, id=17, 351.3125pt x 193.72375pt>
+[2] [3] <placeholder.jpg, id=20, 351.3125pt x 193.72375pt>
 File: placeholder.jpg Graphic file (type jpg)
- <use placeholder.jpg>
-Package pdftex.def Info: placeholder.jpg used on input line 222.
+
+<use placeholder.jpg>
+Package pdftex.def Info: placeholder.jpg used on input line 237.
 (pdftex.def)             Requested size: 155.99762pt x 86.025pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3] [4 <./placeholder.jpg>]
+ [4] [5 <./placeholder.jpg>]
 No file elsarticle-template-1-num.bbl.
-[5] (elsarticle-template-1-num.aux) ) 
+[6] (elsarticle-template-1-num.aux) ) 
 Here is how much of TeX's memory you used:
  3496 strings out of 493698
  41393 string characters out of 3144406
- 107186 words of memory out of 3000000
+ 108186 words of memory out of 3000000
  6762 multiletter control sequences out of 15000+200000
  17270 words of font info for 45 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 34i,7n,30p,790b,224s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,7n,30p,941b,224s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
 ps/cm-super/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
 fonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
@@ -497,9 +489,9 @@ blic/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
 uper/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm
 1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti1000.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (5 pages, 221910 bytes).
+Output written on elsarticle-template-1-num.pdf (6 pages, 228905 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 75 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

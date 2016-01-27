@@ -192,13 +192,28 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 \begin{large}
 \textbf{Modello\\}
 \end{large}
+**Inserire formule varie**
 
+\subsection{Metaeuristica scelta per il modello}
 
+Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede l'implementazione del modello di programmazione lineare intera tramite due tecniche ovvero CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
+Le metaeuristiche sono metodologie generali di schemi algoritmici concepiti indipendentemente dal problema specifico. Tali metodi definiscono delle componenti e le loro iterazioni al fine di raggiungere una buona soluzione. Il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione. Se l'ottimizzazione sull'intorno della soluzione corrente produce una soluzione migliorante il procedimento viene ripetuto partendo, come soluzione corrente, dalla soluzione appena determinata. Nello specifico, i metodi utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, che consistono in quanto segue:
 
-\subsection{Subsection One}
+\begin{itemize}
+\item \textbf{Local Search:} questo algoritmo termina quando non è più possibile trovare delle soluzioni miglioranti nell'intorno della soluzione corrente, oppure quando è stata determinata una soluzione con valore della funzione obiettivo uguale a qualche bound. In alternativa si può far terminare l'algoritmo dopo un prefissato tempo di calcolo o numero di iterazioni e restituire la migliore soluzione trovata fino a quel momento.  
+\item \textbf{Simulated Annealing:} l'idea di base di questi algoritmi è di simulare il comportamento di un processo termodinamico di ricottura di materiali solidi. Essi utilizzano tecniche di ricerca locale per definire ed esplorare l'intorno di una soluzione corrente: se l'intorno contiene una soluzione migliorante allora questa diviene la nuova soluzione corrente ed il procedimento viene iterato, altrimenti si valuta il peggioramento del valore della soluzione che si avrebbe spostandosi dalla soluzione corrente verso la miglior soluzione dell'intorno e si effettua questo spostamento in base ad una probabilità. L'algoritmo infine termina quando viene raggiunto un numero prefissato di iterazioni, quando si raggiunge un prefissato tempo di calcolo, se viene dimostrata l'ottimalità della soluzione o se si eseguono un certo numero di iterazioni senza miglioramento della soluzione. 
+\end{itemize}
 
-Quisque elit ipsum, porttitor et imperdiet in, facilisis ac diam. Nunc facilisis interdum felis eget tincidunt. In condimentum fermentum leo, non consequat leo imperdiet pharetra. Fusce ac massa ipsum, vel convallis diam. Quisque eget turpis felis. Curabitur posuere, risus eu placerat porttitor, magna metus mollis ipsum, eu volutpat nisl erat ac justo. Nullam semper, mi at iaculis viverra, nunc velit iaculis nunc, eu tempor ligula eros in nulla. Aenean dapibus eleifend convallis. Cras ut libero tellus. Integer mollis eros eget risus malesuada fringilla mattis leo facilisis. Etiam interdum turpis eget odio ultricies sed convallis magna accumsan. Morbi in leo a mauris sollicitudin molestie at non nisl.
+Analizzando più nello specifico il Simulated Annealing, abbiamo che esso accetterà di effettuare lo spostamento in base ad una probabilità calcolata come segue:
+
+\begin{center}
+p = exp( $\delta$/t)
+\end{center}
+
+dove $\delta$ è l'entità del peggioramento, ovvero la differenza tra il valore della nuova soluzione de il valore della soluzione corrente, e t è la temperatura di processo. Come accennato precedentemente, se la mossa viene accettata allora l'algoritmo continua partendo dalla nuova soluzione corrente, altrimenti viene considerata la probabilità di accettare la seconda miglior soluzione dell'intorno. Si procederà quindi in questo modo fino a che non viene trovata una qualche soluzione che viene accettata. Se non ci sono soluzioni vicine miglioranti e nessuna soluzione peggiorante viene accettata, il metodo si ferma e restituisce la miglior soluzione esplorata. 
+
+Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo. In principio t viene inizializzato ad un valore t0 > 0 relativamente elevato e aggiornato, con una certa frequenza, secondo una predeterminata funzione di riduzione; in alternativa può essere anche aggiornato in modo dinamico quando il numero di mosse accettate è stato superiore a una certa soglia per un certo numero di iterazioni.
 
 \begin{table}[h]
 \centering
