@@ -80,6 +80,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+\usepackage{listings}
+\lstloadlanguages{C++}
+
+\renewcommand{\lstlistingname}{Codice}
+
 \journal{Journal Name}
 
 \begin{document}
@@ -194,44 +199,67 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 \end{large}
 **Inserire formule varie**
 
-\subsection{Metaeuristica scelta per il modello}
+\subsection{Metaeuristiche scelte per il modello}
 
 Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede l'implementazione del modello di programmazione lineare intera tramite due tecniche ovvero CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
-Le metaeuristiche sono metodologie generali di schemi algoritmici concepiti indipendentemente dal problema specifico. Tali metodi definiscono delle componenti e le loro iterazioni al fine di raggiungere una buona soluzione. Il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione. Se l'ottimizzazione sull'intorno della soluzione corrente produce una soluzione migliorante il procedimento viene ripetuto partendo, come soluzione corrente, dalla soluzione appena determinata. Nello specifico, i metodi utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, che consistono in quanto segue:
+Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, che consistono in quanto segue:
 
-\begin{itemize}
-\item \textbf{Local Search:} questo algoritmo termina quando non è più possibile trovare delle soluzioni miglioranti nell'intorno della soluzione corrente, oppure quando è stata determinata una soluzione con valore della funzione obiettivo uguale a qualche bound. In alternativa si può far terminare l'algoritmo dopo un prefissato tempo di calcolo o numero di iterazioni e restituire la migliore soluzione trovata fino a quel momento.  
-\item \textbf{Simulated Annealing:} l'idea di base di questi algoritmi è di simulare il comportamento di un processo termodinamico di ricottura di materiali solidi. Essi utilizzano tecniche di ricerca locale per definire ed esplorare l'intorno di una soluzione corrente: se l'intorno contiene una soluzione migliorante allora questa diviene la nuova soluzione corrente ed il procedimento viene iterato, altrimenti si valuta il peggioramento del valore della soluzione che si avrebbe spostandosi dalla soluzione corrente verso la miglior soluzione dell'intorno e si effettua questo spostamento in base ad una probabilità. L'algoritmo infine termina quando viene raggiunto un numero prefissato di iterazioni, quando si raggiunge un prefissato tempo di calcolo, se viene dimostrata l'ottimalità della soluzione o se si eseguono un certo numero di iterazioni senza miglioramento della soluzione. 
-\end{itemize}
 
-Analizzando più nello specifico il Simulated Annealing, abbiamo che esso accetterà di effettuare lo spostamento in base ad una probabilità calcolata come segue:
 
-\begin{center}
-p = exp( $\delta$/t)
-\end{center}
+\subsection{Implementazione delle metaeuristiche}
 
-dove $\delta$ è l'entità del peggioramento, ovvero la differenza tra il valore della nuova soluzione de il valore della soluzione corrente, e t è la temperatura di processo. Come accennato precedentemente, se la mossa viene accettata allora l'algoritmo continua partendo dalla nuova soluzione corrente, altrimenti viene considerata la probabilità di accettare la seconda miglior soluzione dell'intorno. Si procederà quindi in questo modo fino a che non viene trovata una qualche soluzione che viene accettata. Se non ci sono soluzioni vicine miglioranti e nessuna soluzione peggiorante viene accettata, il metodo si ferma e restituisce la miglior soluzione esplorata. 
+Gli algoritmi Local Search e Simulated Annealing sono stati implementati attraverso il seguente codice:
 
-Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo. In principio t viene inizializzato ad un valore t0 > 0 relativamente elevato e aggiornato, con una certa frequenza, secondo una predeterminata funzione di riduzione; in alternativa può essere anche aggiornato in modo dinamico quando il numero di mosse accettate è stato superiore a una certa soglia per un certo numero di iterazioni.
 
-\begin{table}[h]
-\centering
-\begin{tabular}{l l l}
-\hline
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\hline
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\hline
-\end{tabular}
-\caption{Table caption}
-\end{table}
+\begin{lstlisting}[basicstyle=\small, caption={Local Search}, frame=single, language=C++]
 
-\subsection{Subsection Two}
+while (true){
+	vector<int> newSol = findBestN(sol);
+	if (evaluate(newSol) >= evaluate(sol)){	
+		return evaluate(sol);
+	}else{					
+		sol = newSol;
+	}
+}
 
-Donec eget ligula venenatis est posuere eleifend in sit amet diam. Vestibulum sollicitudin mauris ac augue blandit ultricies. Nulla facilisi. Etiam ut turpis nunc. Praesent leo orci, tincidunt vitae feugiat eu, feugiat a massa. Duis mauris ipsum, tempor vel condimentum nec, suscipit non mi. Fusce quis urna dictum felis posuere sagittis ac sit amet erat. In in ultrices lectus. Nulla vitae ipsum lectus, a gravida erat. Etiam quam nisl, blandit ut porta in, accumsan a nibh. Phasellus sodales euismod dolor sit amet elementum. Phasellus varius placerat erat, nec gravida libero pellentesque id. Fusce nisi ante, euismod nec cursus at, suscipit a enim. Nulla facilisi.
+
+\end{lstlisting}
+
+
+Come si può vedere, l'algoritmo di Local Search è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato un una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. 
+
+
+\begin{lstlisting}[basicstyle=\small, caption={Simulated Annealing}, frame=single, language=C++]
+
+n_passi = 100000.0 * n / 5;
+
+while (step < n_passi){
+	newSol = getNeigh(sol,2,true);			
+	float de = evaluate(sol) - evaluate(newSol);
+	if (de > 0){
+		sol = newSol;
+	}else{ 
+		temp = 1-(step/n_passi);	
+		double prob = exp((de)/temp);	
+		srand(time(NULL)+for_random);		
+		for_random = for_random + 1;
+		
+		if (prob*100 > (rand()%100) ){
+			sol = newSol;
+		}
+	}
+step ++; 
+}
+
+return(LocalSearch(sol));
+	
+\end{lstlisting}
+
+Per quanto concerne invece l'algoritmo di Simulated Annealing abbiamo che esso è composto da un ciclo while principale che opererà finché step <= n-passi; da notare che il numero di passi inoltre è dinamico così che esso cresca al crescere del numero di nodi coinvolti nel problema. In cosa consiste quindi questo algoritmo? In sostanza viene calcolata una nuova soluzione attraverso la funzione getNeigh, dopodiché verrà calcolata la differenza tra il valore della soluzione corrente e quello della nuova soluzione. Se il delta ottenuto è maggiore di zero significa che la nuova soluzione è migliorativa e quindi aggiornerò di conseguenza sol, se invece così non è procederemo in maniera differente rispetto alla Local Search. Andremo infatti a calcolare per prima cosa la temperatura di raffreddamento, valore che è coinvolto nel calcolo della probabilità di accettare una mossa peggiorativa. Questa probabilità, nel caso sia maggiore di un numero random calcolato attraverso la funzione srand, comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa non sarà accettata.
+
+Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuare infine una fase di intensificazione tramite l'operazione di Local Search eseguita sulla soluzione migliore calcolata in precedenza. Il motivo di ciò è che la Local Search è una tecnica relativamente economica in quanto a tempi di esecuzione e permette di raffinare ulteriormente la soluzione trovata.
+
 
 \begin{figure}[h]
 \centering\includegraphics[width=0.4\linewidth]{placeholder}

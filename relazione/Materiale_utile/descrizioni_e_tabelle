@@ -1,0 +1,26 @@
+\begin{itemize}
+\item \textbf{Local Search:} questo algoritmo termina quando non è più possibile trovare delle soluzioni miglioranti nell'intorno della soluzione corrente, oppure quando è stata determinata una soluzione con valore della funzione obiettivo uguale a qualche bound. In alternativa si può far terminare l'algoritmo dopo un prefissato tempo di calcolo o numero di iterazioni e restituire la migliore soluzione trovata fino a quel momento.  
+\item \textbf{Simulated Annealing:} l'idea di base di questi algoritmi è di simulare il comportamento di un processo termodinamico di ricottura di materiali solidi. Essi utilizzano tecniche di ricerca locale per definire ed esplorare l'intorno di una soluzione corrente: se l'intorno contiene una soluzione migliorante allora questa diviene la nuova soluzione corrente ed il procedimento viene iterato, altrimenti si valuta il peggioramento del valore della soluzione che si avrebbe spostandosi dalla soluzione corrente verso la miglior soluzione dell'intorno e si effettua questo spostamento in base ad una probabilità. L'algoritmo infine termina quando viene raggiunto un numero prefissato di iterazioni, quando si raggiunge un prefissato tempo di calcolo, se viene dimostrata l'ottimalità della soluzione o se si eseguono un certo numero di iterazioni senza miglioramento della soluzione. 
+\end{itemize}
+
+Analizzando più nello specifico il Simulated Annealing, abbiamo che esso accetterà di effettuare lo spostamento in base ad una probabilità calcolata come segue:
+
+\begin{center}
+p = exp( $\delta$/t)
+\end{center}
+
+dove $\delta$ è l'entità del peggioramento, ovvero la differenza tra il valore della nuova soluzione de il valore della soluzione corrente, e t è la temperatura di processo. Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo. In principio t viene inizializzato ad un valore t0 > 0 relativamente elevato e aggiornato, con una certa frequenza, secondo una predeterminata funzione di riduzione.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l l l}
+\hline
+\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+\hline
+Treatment 1 & 0.0003262 & 0.562 \\
+Treatment 2 & 0.0015681 & 0.910 \\
+Treatment 3 & 0.0009271 & 0.296 \\
+\hline
+\end{tabular}
+\caption{Table caption}
+\end{table}
