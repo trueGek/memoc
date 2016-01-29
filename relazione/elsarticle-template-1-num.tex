@@ -199,20 +199,16 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 \end{large}
 **Inserire formule varie**
 
-\subsection{Metaeuristiche scelte per il modello}
+\section{Metaeuristiche scelte per il modello e loro implementazione}
 
 Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede l'implementazione del modello di programmazione lineare intera tramite due tecniche ovvero CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
-Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, che consistono in quanto segue:
-
-
-
-\subsection{Implementazione delle metaeuristiche}
-
-Gli algoritmi Local Search e Simulated Annealing sono stati implementati attraverso il seguente codice:
+Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, i cui algoritmi sono riportati qui di seguito:
 
 
 \begin{lstlisting}[basicstyle=\small, caption={Local Search}, frame=single, language=C++]
+
+sol = getInitialSol(random);
 
 while (true){
 	vector<int> newSol = findBestN(sol);
@@ -227,11 +223,12 @@ while (true){
 \end{lstlisting}
 
 
-Come si può vedere, l'algoritmo di Local Search è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato un una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. 
+Come si può vedere, l'algoritmo di Local Search crea innanzitutto una soluzione iniziale da cui partire tramite la funzione getInitialSol, dopodiché esso è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato un una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. 
 
 
 \begin{lstlisting}[basicstyle=\small, caption={Simulated Annealing}, frame=single, language=C++]
 
+sol = getInitialSol(random);
 n_passi = 100000.0 * n / 5;
 
 while (step < n_passi){
@@ -256,7 +253,13 @@ return(LocalSearch(sol));
 	
 \end{lstlisting}
 
-Per quanto concerne invece l'algoritmo di Simulated Annealing abbiamo che esso è composto da un ciclo while principale che opererà finché step <= n-passi; da notare che il numero di passi inoltre è dinamico così che esso cresca al crescere del numero di nodi coinvolti nel problema. In cosa consiste quindi questo algoritmo? In sostanza viene calcolata una nuova soluzione attraverso la funzione getNeigh, dopodiché verrà calcolata la differenza tra il valore della soluzione corrente e quello della nuova soluzione. Se il delta ottenuto è maggiore di zero significa che la nuova soluzione è migliorativa e quindi aggiornerò di conseguenza sol, se invece così non è procederemo in maniera differente rispetto alla Local Search. Andremo infatti a calcolare per prima cosa la temperatura di raffreddamento, valore che è coinvolto nel calcolo della probabilità di accettare una mossa peggiorativa. Questa probabilità, nel caso sia maggiore di un numero random calcolato attraverso la funzione srand, comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa non sarà accettata.
+Per quanto concerne invece l'algoritmo di Simulated Annealing, anch'esso crea innanzitutto una soluzione iniziale da cui partire tramite la funzione getInitialSol, dopodiché troviamo un ciclo while principale che opererà finché step <= n-passi; da notare che il numero di passi inoltre è dinamico così che cresca al crescere del numero di nodi coinvolti nel problema. In cosa consiste quindi questo algoritmo? In sostanza viene calcolata una nuova soluzione attraverso la funzione getNeigh, dopodiché verrà calcolata la differenza tra il valore della soluzione corrente e quello della nuova soluzione. Se il delta ottenuto è maggiore di zero significa che la nuova soluzione è migliorativa e quindi aggiornerò di conseguenza sol, se invece così non è procederemo in maniera differente rispetto alla Local Search. Andremo infatti a calcolare per prima cosa la temperatura di raffreddamento, valore che è coinvolto nel calcolo della probabilità di accettare una mossa peggiorativa. Questa probabilità è calcolata come segue:
+
+\begin{center}
+prob = exp( $\delta$/t)
+\end{center}
+
+dove $\delta$ è l'entità del peggioramento de e t è la temperatura temp di raffreddamento. Nel caso la probabilità prob sia maggiore di un numero random calcolato attraverso la funzione srand ciò comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa verrà scartata. Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo.
 
 Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuare infine una fase di intensificazione tramite l'operazione di Local Search eseguita sulla soluzione migliore calcolata in precedenza. Il motivo di ciò è che la Local Search è una tecnica relativamente economica in quanto a tempi di esecuzione e permette di raffinare ulteriormente la soluzione trovata.
 
@@ -266,14 +269,14 @@ Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuar
 \caption{Figure caption}
 \end{figure}
 
-Integer risus dui, condimentum et gravida vitae, adipiscing et enim. Aliquam erat volutpat. Pellentesque diam sapien, egestas eget gravida ut, tempor eu nulla. Vestibulum mollis pretium lacus eget venenatis. Fusce gravida nisl quis est molestie eu luctus ipsum pretium. Maecenas non eros lorem, vel adipiscing odio. Etiam dolor risus, mattis in pellentesque id, pellentesque eu nibh. Mauris nec ante at orci ultricies placerat ac non massa. Aenean imperdiet, ante eu sollicitudin vestibulum, dolor felis dapibus arcu, sit amet fermentum urna nibh sit amet mauris. Suspendisse adipiscing mollis dolor quis lobortis.
+
 
 \begin{equation}
 \label{eq:emc}
 e = mc^2
 \end{equation}
 
-\section{The Second Section}
+\section{Analisi dei risultati ottenuti}
 \label{S:2}
 
 Reference to Section \ref{S:1}. Etiam congue sollicitudin diam non porttitor. Etiam turpis nulla, auctor a pretium non, luctus quis ipsum. Fusce pretium gravida libero non accumsan. Donec eget augue ut nulla placerat hendrerit ac ut mi. Phasellus euismod ornare mollis. Proin tempus fringilla ultricies. Donec pretium feugiat libero quis convallis. Nam interdum ante sed magna congue eu semper tellus sagittis. Curabitur eu augue elit.
