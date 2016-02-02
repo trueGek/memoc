@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  29 JAN 2016 15:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  2 FEB 2016 16:09
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -495,43 +495,65 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 232.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 233.
  [3] [4]
 <placeholder.jpg, id=27, 351.3125pt x 193.72375pt>
 File: placeholder.jpg Graphic file (type jpg)
  <use placeholder.jpg>
-Package pdftex.def Info: placeholder.jpg used on input line 268.
+Package pdftex.def Info: placeholder.jpg used on input line 269.
 (pdftex.def)             Requested size: 155.99762pt x 86.025pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 289--290
+
+ []
+
 [5 <./placeholder.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 324--325
+
+ []
+
 No file elsarticle-template-1-num.bbl.
-[6] (elsarticle-template-1-num.aux) ) 
+[7] (elsarticle-template-1-num.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5319 strings out of 493698
- 65304 string characters out of 3144406
+ 5321 strings out of 493698
+ 65314 string characters out of 3144406
  165455 words of memory out of 3000000
- 8563 multiletter control sequences out of 15000+200000
+ 8565 multiletter control sequences out of 15000+200000
  20370 words of font info for 53 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  34i,5n,60p,1079b,1657s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/cm-super/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx0600.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/cm-super/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/cm-super/sfbx1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/cm-super/sfrm0600.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
-uper/sfrm1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm
-1095.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti1000.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (6 pages, 269078 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/cm-super/sfbx0600.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-
+super/sfbx1095.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfb
+x1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1440.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0600.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/cm-super/sfti1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-su
+per/sfti1200.pfb>
+Output written on elsarticle-template-1-num.pdf (7 pages, 272431 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
+ 88 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -200,6 +200,7 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 **Inserire formule varie**
 
 \section{Metaeuristiche scelte per il modello e loro implementazione}
+\label{S:2}
 
 Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede l'implementazione del modello di programmazione lineare intera tramite due tecniche ovvero CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
@@ -276,16 +277,59 @@ Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuar
 e = mc^2
 \end{equation}
 
-\section{Analisi dei risultati ottenuti}
-\label{S:2}
+\section{Descrizione dei test effettuati}
+\label{S:3}
 
-Reference to Section \ref{S:1}. Etiam congue sollicitudin diam non porttitor. Etiam turpis nulla, auctor a pretium non, luctus quis ipsum. Fusce pretium gravida libero non accumsan. Donec eget augue ut nulla placerat hendrerit ac ut mi. Phasellus euismod ornare mollis. Proin tempus fringilla ultricies. Donec pretium feugiat libero quis convallis. Nam interdum ante sed magna congue eu semper tellus sagittis. Curabitur eu augue elit.
+Per verificare le prestazioni degli algoritmi utilizzati nel progetto sono stati condotti diversi test con un numero ben definito di istanze per differenti tipologie di dataset. Nel dettaglio sono stati utilizzati quattro diversi dataset in cui i punti sono disposti come segue:
 
-Aenean eleifend purus et massa consequat facilisis. Etiam volutpat placerat dignissim. Ut nec nibh nulla. Aliquam erat volutpat. Nam at massa velit, eu malesuada augue. Maecenas sit amet nunc mauris. Maecenas eu ligula quis turpis molestie elementum nec at est. Sed adipiscing neque ac sapien viverra sit amet vestibulum arcu rhoncus.
+\begin{itemize}
+\item \textbf{Distribuzione uniforme} ovvero uniformemente disposti all'interno dello spazio
+\item In \textbf{cluster} e disposti in tre raggruppamenti
+\item In \textbf{circoli} e disposti in tre circonferenze
+\item In \textbf{linea} e disposti in tre fasce \\
+\end{itemize}
+Per ciascuna tipologia di dataset sono stati poi selezionati 10 raggruppamenti composti da 4 istanze, ognuno con un numero di nodi che va da 10 a 100 ed in cui la differenza della quantità di elementi tra un gruppo ed il successivo è pari a 10. 
 
-Vivamus pharetra nibh in orci euismod congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque lacus diam, congue vel laoreet id, iaculis eu sapien. In id risus ac leo pellentesque pellentesque et in dui. Etiam tincidunt quam ut ante vestibulum ultricies. Nam at rutrum lectus. Aenean non justo tortor, nec mattis justo. Aliquam erat volutpat. Nullam ac viverra augue. In tempus venenatis nibh quis semper. Maecenas ac nisl eu ligula dictum lobortis. Sed lacus ante, tempor eu dictum eu, accumsan in velit. Integer accumsan convallis porttitor. Maecenas pretium tincidunt metus sit amet gravida. Maecenas pretium blandit felis, ac interdum ante semper sed.
+I test condotti per i vari algoritmi sono stati effettuati utilizzando, di volta in volta, sempre gli stessi dataset così da poter confrontare meglio i risultati. Ogni istanza di ogni raggruppamento di ogni dataset è stata infine data in pasto agli algoritmi per un totale di 10 volte ed i risultati registrati ritenuti interessanti per la valutazione sono stati quindi i seguenti:\\
 
-In auctor ultrices elit, vel feugiat ligula aliquam sed. Curabitur aliquam elit sed dui rhoncus consectetur. Cras elit ipsum, lobortis a tempor at, viverra vitae mi. Cras sed urna sed eros bibendum faucibus. Morbi vel leo orci, vel faucibus orci. Vivamus urna nisl, sodales vitae posuere in, tempus vel tellus. Donec magna est, luctus non commodo sit amet, placerat et enim.
+\textbf{{\large Esecuzione utilizzando CPLEX:}
+}\begin{itemize}
+\item Tempo medio impiegato per le 10 esecuzioni di ogni istanza
+\item Valore dell'ottimo\\
+\end{itemize}
+
+
+\textbf{{\large Esecuzione utilizzando la Local Search}
+}\begin{itemize}
+\item Tempo medio impiegato per le 10 esecuzioni di ogni istanza
+\item Tempo totale impiegato dalle 10 esecuzioni
+\item Miglior soluzione ottenuta con la sola Local Search
+\item Peggior soluzione ottenuta con la sola Local Search
+\item Media delle soluzioni ottenute con la sola Local Search
+\item Varianza ottenuna
+\end{itemize}
+
+\textbf{
+{\large Esecuzione utilizzando il Simulated Annealing:}}
+\begin{itemize}
+\item Tempo medio impiegato per le 10 esecuzioni di ogni istanza
+\item Tempo totale impiegato dalle 10 esecuzioni
+\item Miglior soluzione ottenuta con il Simulated Annealing
+\item Peggior soluzione ottenuta con il Simulated Annealing
+\item Media delle soluzioni ottenute con il Simulated Annealing
+\item Varianza ottenuna
+\item Miglior soluzione ottenuta con l'esecuzione della Local Search sui risultati del Simulated Annealing
+\item Peggior soluzione ottenuta con l'esecuzione della Local Search sui risultati del Simulated Annealing
+\item Media delle soluzioni ottenute con l'esecuzione della Local Search sui risultati del Simulated Annealing
+\item Varianza ottenuna\\
+
+\end{itemize}
+
+
+\section{Descrizione dei risultati ottenuti}
+\label{S:4}
+
+
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
