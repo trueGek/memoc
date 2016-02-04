@@ -130,8 +130,10 @@
 \textbf{\abstractname{}}
 
 %% Text of abstract
-Il progetto del corso di Metodi e Modelli per l'Ottimizzazione Combinatoria consiste nel risolvere un problema che vede coinvolta un'azienda metalmeccanica che produce pannelli forati per la costruzione di quadri elettrici. La foratura di questi è eseguita attraverso un macchinario a controllo numerico dotato di una punta diamantata che, muovendosi sul pannello secondo una sequenza programmata, produce i fori nelle posizioni desiderate. L'obiettivo è quindi quello di individuare la sequenza di foratura ottimale che minimizzi i tempi di produzione, tenendo conto che il tempo necessario per la foratura è lo stesso e costante per tutti i punti.
+Il progetto del corso di Metodi e Modelli per l'Ottimizzazione Combinatoria consiste nel risolvere un problema che vede coinvolta un'azienda metalmeccanica che produce pannelli forati per la costruzione di quadri elettrici. La foratura di questi è eseguita attraverso un macchinario a controllo numerico dotato di una punta diamantata che, muovendosi sul pannello secondo una sequenza programmata, produce i fori nelle posizioni desiderate. L'obiettivo è quindi quello di individuare la sequenza di foratura ottimale che minimizzi i tempi di produzione, tenendo conto che il tempo necessario per la foratura è lo stesso e costante per tutti i punti. Il cosiddetto Problema del Commesso Viaggiatore, più comunemente noto come TSP (\textit{Travelling Salesman Problem}), in cui è richiesto di trovare il \textit{circuito Hamiltoniano} di costo complessivo minimo dato un grafo G = (V,E) pesato con costi c\begin{tiny}ij
+\end{tiny} assegnati ad ogni arco (i,j). Un circuito Hamiltoniano non è altro che un ciclo all'interno del grafo tale che ogni vertice v $\in$ V appartenga al ciclo e venga percorso una sola volta. 
 
+Nei problemi di tipo TSP abbiamo poi che i costi degli archi rispettano la cosiddetta \textit{disuguaglianza triangolare} ovvero dati tre punti A, B e C, la distanza tra A e C deve essere al massimo la distanza tra A e B più la distanza tra B e C. Più nel dettaglio il TSP in esame in questo progetto è un \textit{TSP euclideo} o planare cioè nel quale si usano le ordinarie distanze euclidee per i costi degli archi. Nonostante il problema rimanga NP-difficile molte euristiche riescono a lavorare meglio. 
 
 %%
 %% Start line numbering here if you want
@@ -204,7 +206,7 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 
 Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede l'implementazione del modello di programmazione lineare intera tramite due tecniche ovvero CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
-Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, i cui algoritmi sono riportati qui di seguito:
+Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi scelti ed utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing, i cui algoritmi sono riportati qui di seguito:
 
 
 \begin{lstlisting}[basicstyle=\small, caption={Local Search}, frame=single, language=C++]
