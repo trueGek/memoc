@@ -85,6 +85,8 @@
 
 \renewcommand{\lstlistingname}{Codice}
 
+\usepackage{graphicx}
+
 \usepackage{verbatim}
 
 \journal{Journal Name}
@@ -219,6 +221,10 @@ Nello specifico, il problema in esame è un problema di ricerca di vicinato e co
 \end{large}
 
 
+Il risolutore IBM CPLEX è un programma di ottimizzazione che prende il nome dal metodo del simplesso implementato in linguaggio C (anche se ad oggi offre interfacce verso altri linguaggi ed ambienti). Esso trova soluzioni a problemi di programmazione lineare intera anche di notevoli dimensioni, utilizzando le varianti primale o duale del metodo del simplesso. L'implementazione eseguita per il progetto ricalca a grandi linee quanto fatto durante le lezioni di laboratorio: innanzitutto viene letta la matrice delle adiacenze e linearizzata in un array di dimensioni pari a n*n. Dopodiché si inseriranno in coda i costi degli archi c{\tiny ij} come coefficienti delle variabili decisionali y{\tiny ij}. A questo punto dovranno infine essere creati i vari vincoli definiti nel paragrafo 1.1, sotto la voce "Vincoli", attraverso appositi vettori. \\
+
+
+
 \begin{large}
 \textbf{Local Search}
 \end{large}
@@ -286,18 +292,6 @@ dove $\delta$ è l'entità del peggioramento de e t è la temperatura temp di ra
 Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuare infine una \textbf{fase di intensificazione} tramite l'operazione di Local Search eseguita sulla soluzione migliore calcolata in precedenza. Il motivo di ciò è che la Local Search è una tecnica relativamente economica in quanto a tempi di esecuzione e permette di raffinare ulteriormente la soluzione trovata.
 
 
-\begin{figure}[h]
-\centering\includegraphics[width=0.4\linewidth]{placeholder}
-\caption{Figure caption}
-\end{figure}
-
-
-
-\begin{equation}
-\label{eq:emc}
-e = mc^2
-\end{equation}
-
 \section{Descrizione dei test effettuati}
 \label{S:3}
 
@@ -307,12 +301,37 @@ Per verificare le prestazioni degli algoritmi utilizzati nel progetto sono stati
 \item \textbf{Distribuzione uniforme} ovvero uniformemente disposti all'interno dello spazio
 \item In \textbf{cluster} e disposti in tre raggruppamenti
 \item In \textbf{circoli} e disposti in tre circonferenze
-\item In \textbf{linea} e disposti in tre fasce \\
+\item In \textbf{linea} e disposti in tre linee \\
 \end{itemize}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_istanze/random_60.png} 
+\caption{Distribuzione uniforme}\label{fig:1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_istanze/cluster_60.png} 
+\caption{Distribuzione in cluster}\label{fig:2}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_istanze/circle_60.png} 
+\caption{Distribuzione in cerchi}\label{fig:3}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_istanze/line_60.png} 
+\caption{Distribuzione in linee}\label{fig:4}
+\end{figure}
+
 Per ciascuna tipologia di dataset sono stati poi selezionati 10 raggruppamenti composti da 4 istanze, ognuno con un numero di nodi che va da 10 a 100 ed in cui la differenza della quantità di elementi tra un gruppo ed il successivo è pari a 10. Le istanze utilizzate sono in realtà matrici delle adiacenze M di dimensioni n*n tali che nella cella m\begin{tiny}ij\end{tiny} vi è la distanza tra il vertice v\begin{tiny}i\end{tiny} ed il vertice v\begin{tiny}j\end{tiny}
 
-I test condotti per i vari algoritmi sono stati effettuati utilizzando, di volta in volta, sempre gli stessi dataset così da poter confrontare meglio i risultati. Ogni istanza di ogni raggruppamento di ogni dataset è stata infine data in pasto agli algoritmi per un totale di 10 volte ed i risultati registrati ritenuti interessanti per la valutazione sono stati vari quali il tempo medio e totale impiegato, il valore dell'ottimo, le soluzioni migliori, la varianza e via dicendo.\\
-
+I test condotti per i vari algoritmi sono stati effettuati utilizzando, di volta in volta, sempre gli stessi dataset così da poter confrontare meglio i risultati. Ogni istanza di ogni raggruppamento di ogni dataset è stata infine data in pasto agli algoritmi per un totale di 10 volte ed i risultati registrati ritenuti interessanti per la valutazione sono stati vari quali il tempo medio e totale impiegato, il valore dell'ottimo, le soluzioni migliori, la varianza e via dicendo.
 
 \begin{comment} %% Inizia il commento all'elenco puntato
 

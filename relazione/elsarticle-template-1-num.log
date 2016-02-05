@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  4 FEB 2016 20:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  5 FEB 2016 16:01
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -416,18 +416,18 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@in@stream=\read1
 )
 (elsarticle-template-1-num.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
-LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -443,14 +443,14 @@ LaTeX Font Info:    ... okay on input line 92.
 \makeMPintoPDFobject=\count122
 \everyMPtoPDFconversion=\toks25
 )
-LaTeX Info: Redefining \it@ocap on input line 92.
-LaTeX Info: Redefining \it@ccap on input line 92.
+LaTeX Info: Redefining \it@ocap on input line 94.
+LaTeX Info: Redefining \it@ccap on input line 94.
 \c@lstlisting=\count123
-LaTeX Font Info:    Try loading font information for U+msa on input line 128.
+LaTeX Font Info:    Try loading font information for U+msa on input line 130.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 128.
+LaTeX Font Info:    Try loading font information for U+msb on input line 130.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -458,44 +458,39 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 152--154
+Underfull \hbox (badness 10000) in paragraph at lines 154--156
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 160.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 162.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 160.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 162.
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--189
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--191
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
@@ -504,8 +499,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 213--214
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
+
+ []
+
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
+Underfull \hbox (badness 10000) in paragraph at lines 217--217
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 224--225
 
  []
 
@@ -514,68 +519,89 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-)
-Underfull \hbox (badness 10000) in paragraph at lines 243--244
+) [4]
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
 
  []
 
-[4]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 253.
- [5] <placeholder.jpg, id=30, 351.3125pt x 193.72375pt>
-File: placeholder.jpg Graphic file (type jpg)
-
-<use placeholder.jpg>
-Package pdftex.def Info: placeholder.jpg used on input line 290.
-(pdftex.def)             Requested size: 155.99762pt x 86.025pt.
- [6 <./placeholder.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 259.
+[5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 
  []
 
+<grafici_istanze/random_60.png, id=34, 586.8324pt x 456.7464pt>
+File: grafici_istanze/random_60.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--315
+<use grafici_istanze/random_60.png>
+Package pdftex.def Info: grafici_istanze/random_60.png used on input line 310.
+(pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
 
- []
+<grafici_istanze/cluster_60.png, id=36, 586.8324pt x 456.7464pt>
+File: grafici_istanze/cluster_60.png Graphic file (type png)
+
+<use grafici_istanze/cluster_60.png>
+Package pdftex.def Info: grafici_istanze/cluster_60.png used on input line 316.
+
+(pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
+
+<grafici_istanze/circle_60.png, id=37, 586.8324pt x 456.7464pt>
+File: grafici_istanze/circle_60.png Graphic file (type png)
+
+<use grafici_istanze/circle_60.png>
+Package pdftex.def Info: grafici_istanze/circle_60.png used on input line 322.
+(pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
+
+<grafici_istanze/line_60.png, id=38, 586.8324pt x 456.7464pt>
+File: grafici_istanze/line_60.png Graphic file (type png)
+
+<use grafici_istanze/line_60.png>
+Package pdftex.def Info: grafici_istanze/line_60.png used on input line 328.
+(pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
 
 
-LaTeX Warning: Characters dropped after `\end{comment}' on input line 351.
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 370.
 
 
-Overfull \hbox (37.56061pt too wide) in paragraph at lines 356--357
+Overfull \hbox (37.56061pt too wide) in paragraph at lines 375--376
 \T1/cmr/m/n/12 por-ta-ti al-l'in-ter-no dei fi-le Ex-cel de-no-mi-na-ti "cplex_
 results", "lo-cal_search_results",
  []
 
+[7 <./grafici_istanze/random_60.png>] [8 <./grafici_istanze/cluster_60.png> <./
+grafici_istanze/circle_60.png>]
 No file elsarticle-template-1-num.bbl.
-[7] (elsarticle-template-1-num.aux) ) 
+[9 <./grafici_istanze/line_60.png>] (elsarticle-template-1-num.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5352 strings out of 493698
- 65863 string characters out of 3144406
- 164455 words of memory out of 3000000
- 8592 multiletter control sequences out of 15000+200000
+ 5370 strings out of 493698
+ 66388 string characters out of 3144406
+ 166455 words of memory out of 3000000
+ 8607 multiletter control sequences out of 15000+200000
  21069 words of font info for 54 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 34i,5n,60p,977b,1236s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/cm-super/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbi1200.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx0600.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/cm-super/sfbx1095.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/cm-super/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/cm-super/sfbx1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
-uper/sfrm0600.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm
-1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/cm-super/sfti1000.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (7 pages, 309314 bytes).
+ 34i,6n,60p,977b,1771s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/cm-super/sfbi1200.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/cm-super/sfbx0600.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/cm-super/sfbx1095.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm
+-super/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sf
+bx1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0600.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1095.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/cm-super/sfti1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/cm-super/sfti1200.pfb>
+Output written on elsarticle-template-1-num.pdf (9 pages, 331782 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
+ 98 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
