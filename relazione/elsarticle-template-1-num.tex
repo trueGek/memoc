@@ -206,7 +206,7 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 
 Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede la risoluzione del modello di programmazione lineare intera tramite due tecniche ovvero usando il risolutore IBM CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
-Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi scelti ed utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing. Si tratta di metodi metaeuristici ovvero tecniche generali di schemi algoritmici concepiti indipendentemente dal problema specifico.Tali metodi definiscono delle componenti e le loro iterazioni al fine di pervenire ad una buona soluzione ed esse inoltre devono essere specializzate per i singoli problemi. \\
+Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi scelti ed utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing. Si tratta di metodi metaeuristici ovvero tecniche generali di schemi algoritmici concepiti indipendentemente dal problema specifico. Tali metodi definiscono delle componenti e le loro iterazioni al fine di pervenire ad una buona soluzione ed esse inoltre devono essere specializzate per i singoli problemi. \\
 
 \subsection{\textbf{Descrizione delle metaeuristiche}}
 
@@ -232,8 +232,6 @@ Il risolutore IBM CPLEX è un programma di ottimizzazione che prende il nome dal
 
 \begin{lstlisting}[basicstyle=\small, caption={Local Search}, frame=single, language=C++]
 
-sol = getInitialSol(random);
-
 while (true){
 	vector<int> newSol = findBestN(sol);
 	if (evaluate(newSol) >= evaluate(sol)){	
@@ -247,7 +245,9 @@ while (true){
 \end{lstlisting}
 
 
-Come si può vedere, l'algoritmo di Local Search crea innanzitutto una soluzione iniziale da cui partire tramite la funzione getInitialSol, dopodiché esso è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. \\
+Come si può vedere, l'algoritmo di Local Search avvia la sua ricerca da una soluzione iniziale sol che gli viene data in input al momento della chiamata del metodo. All'interno del progetto la Local Search è utilizzata in realtà non come metaeuristica principale ma come metaeuristica per la fase di intensificazione della Simulated Annealing, di consequenza le viene data in input la soluzione che quest'ultima ha trovato così da migliorarne il risultato. Nulla toglie però che questa tecnica si possa utilizzare anche individualmente dandole in pasto, in questo secondo caso, una nuova soluzione di partenza tramite il metodo getInitialSol. 
+
+Entrando nel dettaglio, l'algoritmo è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. \\
 
 \begin{large}
 \textbf{Simulated Annealing}
