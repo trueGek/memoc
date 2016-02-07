@@ -288,7 +288,7 @@ passi; da notare che il numero di passi inoltre è dinamico così che cresca al 
 prob = exp( $\delta$/t)
 \end{center}
 
-dove $\delta$ è l'entità del peggioramento de e t è la temperatura temp di raffreddamento. Nel caso la probabilità prob sia maggiore di un numero random calcolato attraverso la funzione srand ciò comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa verrà scartata. Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo.
+dove $\delta$ è l'entità del peggioramento de e t è la temperatura temp di raffreddamento. Nel caso la probabilità prob sia maggiore di un numero random calcolato attraverso la funzione srand ciò comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa verrà scartata. Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo. \textbf{**AGGIUNGERE ANDAMENTO TEMPERATURA**}
 
 Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuare infine una \textbf{fase di intensificazione} tramite l'operazione di Local Search eseguita sulla soluzione migliore calcolata in precedenza. Il motivo di ciò è che la Local Search è una tecnica relativamente economica in quanto a tempi di esecuzione e permette di raffinare ulteriormente la soluzione trovata.
 
@@ -373,7 +373,77 @@ I test condotti per i vari algoritmi sono stati effettuati utilizzando, di volta
 \section{Descrizione dei risultati ottenuti}
 \label{S:4}
 
-I risultati completi ottenuti dall'esecuzione degli algoritmi sono stati riportati all'interno dei file Excel denominati "cplex\_results", "local\_search\_results", "sim\_annealing\_results" e non quindi direttamente nella relazione a causa della mole di dati che comprendono. In questa sede compariranno quindi solo risultati riassuntivi utili a meglio comprendere le conclusioni a cui si è giunti o, eventualmente, rimandi ai file sopraccitati. 
+I risultati completi ottenuti dall'esecuzione degli algoritmi sono stati riportati all'interno dei file Excel denominati "cplex\_results", "sim\_annealing\_results" e non quindi direttamente nella relazione a causa della mole di dati che comprendono. In questa sede compariranno quindi solo risultati riassuntivi utili a meglio comprendere le conclusioni a cui si è giunti o, eventualmente, rimandi ai file sopraccitati. 
+
+\subsection{\textbf{Tempi di esecuzione}}
+Osservando la figura 5 possiamo constatare un dettaglio davvero interessante: i tempi globali di esecuzione della Simulated Annealing sono inizialmente maggiori per i medesimi dataset rispetto a quelli ottenuti tramite CPLEX, si equiparano per insiemi di 30 punti per poi differenziarsi nuovamente. Dai 30 nodi in poi il grafico in scala logaritmica evidenzia come il CPLEX abbia tempi di esecuzioni ben superiori, con una loro crescita generale molto più rapida rispetto al Simulated Annealing che, invece, ha un andamento molto più moderato. Andiamo però a confrontare alcuni numeri: 
+
+\begin{table}[htbp]
+\caption {Tempi medi di esecuzione globali} \label{tab:title} 
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 
+Num Nodi & Tempi CPLEX & Tempi Sim Annealing \\ 
+\hline 
+10 & 0,07740625
+ & 0,61469375
+ \\ 
+\hline 
+20 & 0,3832 & 1,343675 \\ 
+\hline 
+30 & 2,42165 & 2,18094375
+ \\ 
+\hline 
+40 & 7,20473125
+ & 3,17826875
+ \\ 
+\hline 
+50 & 17,98974375
+ & 4,20775
+ \\ 
+\hline 
+60 & 33,1410875
+ & 5,44746875
+ \\ 
+\hline 
+70 & 549,3165625
+ & 6,76326875
+ \\ 
+\hline 
+80 & 568,953975
+ & 8,2913125
+ \\ 
+\hline 
+90 & 745,47655
+ & 9,8671625
+ \\ 
+\hline 
+100 & 1418,1834375
+ & 11,490575
+ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+\end{table}
+
+Già a partire dai 60 nodi abbiamo 33,14 secondi di CPLEX contro i 5,45 di Simulated Annealing, una differenza che è destinata a crescere a dismisura con il crescere dei nodi, arrivando a 1418,18 secondi contro gli 11.49 per quanto riguarda 100 elementi; un guadagno per il Simulated Annealing in quest'ultimo caso di un ordine di grandezza di un fattore pari a 1000.
+
+Osserviamo adesso più nel dettaglio i tempi di esecuzione: la figura 6 ribadisce quanto detto fino ad ora ma evidenzia che, se il Simulated Annealing si comporta pressoché nel medesimo modo per ogni tipologia di dataset, il CPLEX invece già a partire da 50 nodi varia notevolmente nei quattro casi. Il dataset in cui abbiamo tempi di esecuzione migliori e più omogenei è quello relativo alla distribuzione uniforme dei punti mentre Cluster e Circle mettono decisamente più in difficoltà il risolutore. \\ \\
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/tempi_glob_esec.png} 
+\caption{Grafico che riassume i tempi globali di esecuzione registrati per CPLEX e Simulated Annealing}\label{fig:5}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/tempi_di_esecuzione.png} 
+\caption{Grafico che riassume i tempi di esecuzione divisi per tipo di dataset registrati per CPLEX e Simulated Annealin}\label{fig:6}
+\end{figure}
+
+\subsection{\textbf{Simulated Annealing: il miglioramento ad opera della Local Search}}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
