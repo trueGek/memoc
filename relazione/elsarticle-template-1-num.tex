@@ -445,6 +445,61 @@ Osserviamo adesso più nel dettaglio i tempi di esecuzione: la figura 6 ribadisc
 
 \subsection{\textbf{Simulated Annealing: il miglioramento ad opera della Local Search}}
 
+Come evidenziato nel paragrafo 2.2, la soluzione ottenuta con l'algoritmo di Simulated Annealing è stata ulteriormente raffinata grazie ad una fase di intensificazione realizzata attraverso una Local Search. Si è optato per tale operazione poiché presenta contenuti tempi di esecuzione del metodo in questione in proporzione ai risultati ottenuti. 
+
+La figura 7 presenta il grafico globale di miglioramento dei risultati ottenuti dalla Simulated Annealing grazie alla Local Search: ad eccezione dei dataset da 10 punti, dove il guadagno è minimo, in tutti gli altri casi si è avuto un miglioramento della soluzione nell'intervallo 6\% - 10\%, che ha quindi permesso all'algoritmo realizzato per il progetto di avvicinarsi ulteriormente alla soluzione ottima calcolata dal CPLEX. Osservando invece la figura 8 possiamo notare i diversi comportamenti sulle quattro tipologie di dataset utilizzate. Gli andamenti più regolari si sono registrati per i dataset a Distribuzione Uniforme e a Cluster mentre la Local Search si è trovata più in difficoltà, ed ha avuto risultati più eterogenei, per quanto riguarda i dataset Line e Circle.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/guadagno_LS_globale.png} 
+\caption{Grafico che riassume il miglioramento globale, in punti percentuali, dei risultati della Simulated Annealing ad opera della Local Search}\label{fig:7}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/guadagno_LS.png} 
+\caption{Grafico che riassume il miglioramento per tipologia di dataset, in punti percentuali, dei risultati della Simulated Annealing ad opera della Local Search}\label{fig:8}
+\end{figure}
+
+\subsection{\textbf{Simulated Annealing e CPLEX: soluzioni a confronto}}
+
+Se i tempi di esecuzione della Simulated Annealing sono notevolmente migliori rispetto a quelli di CPLEX lo stesso non si può dire per le soluzioni calcolate. L'algoritmo implementato nel progetto infatti trova delle soluzioni che si possono definire sub-ottime, caratteristica tipica degli algoritmi appartenenti alle metaeuristiche. Nella figura 9 si osserva proprio ciò: l'andamento del peggioramento è crescente ad eccezione dei primi due gruppi di istanze e spazia tra i 0,89 ed i 7,62 punti percentuali in più rispetto all'ottimo di CPLEX da come si può vedere nella tabella sottostante: 
+
+\begin{table}[htbp]
+\caption {Peggioramento della soluzione ad opera della Sim Annealing} \label{tab:title} 
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline 
+Num Istanze & Peggioramento Sim Annealing \\ 
+\hline 
+10 & 100,00\% \\ 
+\hline 
+20 & 100,05\% \\ 
+\hline 
+30 & 101,78\% \\ 
+\hline 
+40 & 100,89\% \\ 
+\hline 
+50 & 101,06\% \\ 
+\hline 
+60 & 102,97\% \\ 
+\hline 
+70 & 107,62\% \\ 
+\hline 
+80 & 102,17\% \\ 
+\hline 
+90 & 102,13\% \\ 
+\hline 
+100 & 102,48\% \\ 
+\hline 
+\end{tabular} 
+\end{center}
+\end{table}
+
+
+Questo risultato si è ottenuto nonostante si sia adottato un numero di passi per il Simulated Annealing dinamico, ovvero che cresce al crescere dei punti  
+
+
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
 %% \appendix
