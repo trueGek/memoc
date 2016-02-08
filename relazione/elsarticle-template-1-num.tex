@@ -497,8 +497,26 @@ Num Istanze & Peggioramento Sim Annealing \\
 \end{table}
 
 
-Questo risultato si è ottenuto nonostante si sia adottato un numero di passi per il Simulated Annealing dinamico, ovvero che cresce al crescere dei punti  
+Questo risultato si è ottenuto nonostante si sia adottato un numero di passi per il Simulated Annealing dinamico, ovvero che cresce al crescere dei punti coinvolti nel problema in esame. Per porre rimedio a ciò un'ipotesi potrebbe essere quella di aumentare ulteriormente il numero di passi eseguiti al crescere dei nodi coinvolti, ma siamo davvero sicuri che in termini di efficienza ciò sia vantaggioso? Nella fase di test si è effettivamente provato ad utilizzare un numero di passi dinamico superiore rispetto alla formula:
 
+\begin{center}
+n\_passi = 100000.0 * n / 5
+\end{center}
+ma il guadagno in quanto a miglioramento della soluzione non era proporzionale all'aumento dei tempi di esecuzione, che raggiungevano addirittura un picco di ben 80 secondi in più rispetto ai circa 12 per i gruppi da 100 nodi. 
+
+La figura 10 mostra invece il medesimo grafico ma suddiviso per tipi di dataset. In questo caso possiamo osservare che Distribuzione Uniforme e Line hanno un andamento crescente molto simile nel peggioramento da parte della Simulated Annealing della soluzione, mentre Cluster e Circle hanno fluttuazioni talvolta anche importanti. Nel dettaglio le istanze da 70 punti del dataset Circle arrivano addirittura ad un 26\% in più rispetto all'ottimo di CPLEX, evidenziando come alcune particolari distribuzioni di nodi comportino un aumento della complessità considerevole che mette in difficoltà l'algoritmo realizzato per il progetto. 
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/peggioramento_SA_globale.png} 
+\caption{Grafico che riassume il peggioramento, in punti percentuali, dei risultati della Simulated Annealing rispetto al CPLEX}\label{fig:9}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/peggioramento_SA.png} 
+\caption{Grafico che riassume il peggioramento, in punti percentuali, dei risultati della Simulated Annealing rispetto al CPLEX}\label{fig:10}
+\end{figure}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections

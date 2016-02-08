@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  8 FEB 2016 15:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  8 FEB 2016 16:01
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -419,6 +419,9 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 
 LaTeX Warning: Label `tab:title' multiply defined.
 
+
+LaTeX Warning: Label `fig:8' multiply defined.
+
 )
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 95.
 LaTeX Font Info:    ... okay on input line 95.
@@ -615,19 +618,36 @@ File: grafici_confronti/guadagno_LS.png Graphic file (type png)
 Package pdftex.def Info: grafici_confronti/guadagno_LS.png used on input line 4
 60.
 (pdftex.def)             Requested size: 245.41628pt x 148.15314pt.
- [12 <./grafici_confronti/guadagno_LS_globale.png (PNG copy)>]
+ [12 <./grafici_confronti/guadagno_LS_globale.png (PNG copy)>] [13 <./grafici_c
+onfronti/guadagno_LS.png (PNG copy)>]
+<grafici_confronti/peggioramento_SA_globale.png, id=70, 482.30188pt x 296.60812
+pt>
+File: grafici_confronti/peggioramento_SA_globale.png Graphic file (type png)
+ <use grafici_confronti/peggioramento_SA_globale.png>
+Package pdftex.def Info: grafici_confronti/peggioramento_SA_globale.png used on
+ input line 511.
+(pdftex.def)             Requested size: 241.15034pt x 148.3037pt.
+
+<grafici_confronti/peggioramento_SA.png, id=71, 489.32813pt x 301.62688pt>
+File: grafici_confronti/peggioramento_SA.png Graphic file (type png)
+
+<use grafici_confronti/peggioramento_SA.png>
+Package pdftex.def Info: grafici_confronti/peggioramento_SA.png used on input l
+ine 517.
+(pdftex.def)             Requested size: 244.66345pt x 150.81306pt.
+
 No file elsarticle-template-1-num.bbl.
-[13 <./grafici_confronti/guadagno_LS.png (PNG copy)>]
-(elsarticle-template-1-num.aux)
+[14 <./grafici_confronti/peggioramento_SA_globale.png (PNG copy)>] [15 <./grafi
+ci_confronti/peggioramento_SA.png (PNG copy)>] (elsarticle-template-1-num.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5396 strings out of 493698
- 67209 string characters out of 3144406
+ 5408 strings out of 493698
+ 67646 string characters out of 3144406
  165455 words of memory out of 3000000
- 8628 multiletter control sequences out of 15000+200000
+ 8638 multiletter control sequences out of 15000+200000
  21069 words of font info for 54 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  34i,7n,60p,977b,1659s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -645,9 +665,9 @@ s/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX
 2.9/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts
 /type1/public/cm-super/sfti1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (13 pages, 480855 bytes).
+Output written on elsarticle-template-1-num.pdf (15 pages, 545115 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
