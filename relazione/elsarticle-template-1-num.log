@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  8 FEB 2016 17:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  10 FEB 2016 00:11
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -638,9 +638,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 523--524
  []
 
 [14 <./grafici_confronti/peggioramento_SA_globale.png (PNG copy)>]
-No file elsarticle-template-1-num.bbl.
+Underfull \hbox (badness 10000) in paragraph at lines 532--533
+
+ []
+
 [15 <./grafici_confronti/peggioramento_SA.png (PNG copy)>]
-(elsarticle-template-1-num.aux)
+No file elsarticle-template-1-num.bbl.
+[16] (elsarticle-template-1-num.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -667,9 +671,9 @@ s/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX
 2.9/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts
 /type1/public/cm-super/sfti1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (15 pages, 547418 bytes).
+Output written on elsarticle-template-1-num.pdf (16 pages, 549201 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
+ 126 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

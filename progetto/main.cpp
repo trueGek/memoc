@@ -242,7 +242,7 @@ int main (int argc, char *argv[])
     {
         dataReader->getNextProblem(xy);			// Valorizzo il vettore xy con i valori del nuovo problema ottenuto da dataReader
         float total_time = 0.0f;			// Definizione del tempo totale impiegato per la risoluzione di un dataset: somma tutti i tempi di esecuzione. All'inizio è 0
-	double timelimit = 1200;			// Definizione del tempo massimo che la funzione CPLEX può ciclare per trovare una soluzione
+	double timelimit = 3600;			// Definizione del tempo massimo che la funzione CPLEX può ciclare per trovare una soluzione
 	double cur_sol;					// Dichiarazione di una variabile che mi servirà per tenere traccia di qual'è la soluzione del dataset corrente
 	n = dataReader->nodes;				// Definisco il numero di nodi del problema corrente ottenendolo dal dataReader
 	

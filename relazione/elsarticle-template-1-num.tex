@@ -524,7 +524,16 @@ In questo paragrafo verranno commentati altri test condotti con diverse configur
 
 {\large \textbf{Limite di tempo CPLEX: cosa è emerso}}
 
-blablabla
+Durante i test eseguiti con CPLEX è stato impostato un limite di tempo entro cui la soluzione doveva essere calcolata, questo perché sono state individuate alcune istanze con cui il risolutore incontrava notevoli difficoltà e che anche dopo molte ore non produceva alcun tipo di risultato in output. Il comando con cui si è eseguito ciò è il seguente:
+
+\begin{center}
+CPXsetdblparam(env, CPX\_PARAM\_TILIM, timelimit)
+\end{center}
+dove timelimit è stato impostato a 3600 secondi. Il numero di problemi che ha raggiunto tale upper bound sono solo 10 su 140, tutti collocati nella fascia di nodi 70 - 100, ed in questo caso si è preso come valore di riferimento per l'ottimo quello che era stato calcolato fino a quel momento. Come si può vedere quindi, ciò non ha costituito la "norma" per le varie istanze quanto piuttosto dei casi isolati che era comunque doveroso trattare adeguatamente.\\
+
+{\large \textbf{Test con un maggior numero di passi}}
+
+Come evidenziato nel paragrafo 4.3, sono stati condotti test impostando un numero di passi dinamico molto più alto rispetto ai dati evidenziati in precedenza. Purtroppo però un aumento considerevole di passi non ha comportato il conseguimento di risultati così migliori ed anzi, il marginalissimo guadagno della soluzione calcolata dal Simulated Annealing così impostato non giustifica affatto un aumento così elevato dei tempi di esecuzione. Come si può vedere dalla figura ... \textbf{CONTINUA*****}
 
 \section{Conclusioni}
 \label{S:5}
