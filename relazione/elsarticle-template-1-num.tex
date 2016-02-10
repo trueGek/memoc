@@ -206,7 +206,7 @@ Il modello, a questo punto, prevede un totale di cinque vincoli differenti che p
 
 Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzazione Combinatoria prevede la risoluzione del modello di programmazione lineare intera tramite due tecniche ovvero usando il risolutore IBM CPLEX ed una o più metaeuristiche a nostra scelta. Una volta fatto ciò si procederà testando i metodi con delle istanze di prova ed i risultati e statistiche confrontati tra di loro per valutarne le prestazioni.
 
-Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi scelti ed utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing. Si tratta di metodi metaeuristici ovvero tecniche generali di schemi algoritmici concepiti indipendentemente dal problema specifico. Tali metodi definiscono delle componenti e le loro iterazioni al fine di pervenire ad una buona soluzione ed esse inoltre devono essere specializzate per i singoli problemi. \\
+Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi scelti ed utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing. Si tratta di metodi metaeuristici ovvero tecniche generali di schemi algoritmici concepiti indipendentemente dal problema specifico. Tali metodi definiscono delle componenti e le loro iterazioni al fine di pervenire ad una buona soluzione ed esse inoltre devono essere specializzate per i singoli problemi. In entrambe le metaeuristiche implementate si è infine utilizzato un vicinato del tipo 2-opt.\\
 
 \subsection{\textbf{Descrizione delle metaeuristiche}}
 
@@ -247,7 +247,14 @@ while (true){
 
 Come si può vedere, l'algoritmo di Local Search avvia la sua ricerca da una soluzione iniziale sol che gli viene data in input al momento della chiamata del metodo. All'interno del progetto la Local Search è utilizzata in realtà non come metaeuristica principale ma come metaeuristica per la fase di intensificazione della Simulated Annealing, di consequenza le viene data in input la soluzione che quest'ultima ha trovato così da migliorarne il risultato. Nulla toglie però che questa tecnica si possa utilizzare anche individualmente dandole in pasto, in questo secondo caso, una nuova soluzione di partenza tramite il metodo getInitialSol. 
 
-Entrando nel dettaglio, l'algoritmo è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. \\
+Entrando nel dettaglio, l'algoritmo è stato implementato utilizzando un unico ciclo while che opera finché non viene restituito in output un valore. Questo significa che ciò avverrà unicamente quando, dopo aver calcolato una nuova soluzione con newSol = findBestN(sol), il suo valore sarà peggiore del valore della soluzione corrente. Se così non è la soluzione corrente viene aggiornata alla soluzione appena calcolata ed il ciclo continua ad operare fino al punto in cui viene trovata una soluzione peggiorativa. 
+
+Di seguito verranno ora elencate nel dettaglio le funzioni chiave utilizzate nella Local Search:
+
+\begin{itemize}
+\item \textbf{findBestN:} Questa funzione, partendo da una soluzione iniziale, calcola una nuova soluzione invertendo gli elementi contenuti all'interno di un intervallo pos1 - pos2 che cresce progressivamente. Quando la nuova soluzione è migliore della vecchia il ciclo termina e restituirà in output tale valore
+\item \textbf{evaluate:} Funzione che serve per calcolare il valore di una soluzione 
+\end{itemize}
 
 \begin{large}
 \textbf{Simulated Annealing}
@@ -281,17 +288,28 @@ return(LocalSearch(sol));
 	
 \end{lstlisting}
 
-Per quanto concerne invece l'algoritmo di Simulated Annealing, anch'esso crea innanzitutto una soluzione iniziale da cui partire tramite la funzione getInitialSol, dopodiché troviamo un ciclo while principale che opererà finché step <= n\_
-passi; da notare che il numero di passi inoltre è dinamico così che cresca al crescere del numero di nodi coinvolti nel problema. In cosa consiste quindi questo algoritmo? Viene calcolata una nuova soluzione attraverso la funzione getNeigh, dopodiché verrà calcolata la differenza tra il valore della soluzione corrente e quello della nuova soluzione. Se il delta ottenuto è maggiore di zero significa che la nuova soluzione è migliorativa e quindi aggiornerò di conseguenza sol, se invece così non è procederemo in maniera differente rispetto alla Local Search. Andremo infatti a calcolare per prima cosa la temperatura di raffreddamento, valore che è coinvolto nel calcolo della probabilità di accettare una mossa peggiorativa. Questa probabilità è calcolata come segue:
+Per quanto concerne invece l'algoritmo di Simulated Annealing, esso crea innanzitutto una soluzione iniziale da cui partire tramite la funzione getInitialSol, dopodiché troviamo un ciclo while principale che opererà finché step <= n\_passi; da notare che il numero di passi inoltre è dinamico così che cresca al crescere del numero di nodi coinvolti nel problema. In cosa consiste quindi questo algoritmo? Viene calcolata una nuova soluzione attraverso la funzione getNeigh, dopodiché verrà calcolata la differenza tra il valore della soluzione corrente e quello della nuova soluzione. Se il delta ottenuto è maggiore di zero significa che la nuova soluzione è migliorativa e quindi aggiornerò di conseguenza sol, se invece così non è procederemo in maniera differente rispetto alla Local Search. Andremo infatti a calcolare per prima cosa la temperatura di raffreddamento, valore che è coinvolto nel calcolo della probabilità di accettare una mossa peggiorativa. Questa probabilità è calcolata come segue:
 
 \begin{center}
 prob = exp( $\delta$/t)
 \end{center}
 
-dove $\delta$ è l'entità del peggioramento de e t è la temperatura temp di raffreddamento. Nel caso la probabilità prob sia maggiore di un numero random calcolato attraverso la funzione srand ciò comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa verrà scartata. Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo. \textbf{**AGGIUNGERE ANDAMENTO TEMPERATURA**}
+dove $\delta$ è l'entità del peggioramento de e t è la temperatura temp di raffreddamento. Nel caso la probabilità prob sia maggiore di un numero random calcolato attraverso la funzione srand ciò comporterà appunto l'accettare la mossa peggiorativa, altrimenti essa verrà scartata. Come si modifica però la probabilità p? Essa diminuisce al crescere del peggioramento indotto dalla mossa stessa e cresce al crescere della temperatura t di processo. Tale parametro di controllo viene generalmente inizializzato ad un valore t{\tiny 0} > 0 elevato e aggiornato con una certa frequenza in modo dinamico. Nello specifico abbiamo che la temperatura in questo progetto è stata così calcolata: 
+
+\begin{center}
+temp = 1-(step/n\_passi)
+\end{center}
+Inizialmente essa avrà un valore alto poiché il numero di passi sarà molto piccolo ma mano a mano che crescerà la temperatura diminuirà di conseguenza.
 
 Al termine delle operazioni eseguite tramite il ciclo while andremo ad effettuare infine una \textbf{fase di intensificazione} tramite l'operazione di Local Search eseguita sulla soluzione migliore calcolata in precedenza. Il motivo di ciò è che la Local Search è una tecnica relativamente economica in quanto a tempi di esecuzione e permette di raffinare ulteriormente la soluzione trovata.
 
+Di seguito verranno ora elencate nel dettaglio le funzioni chiave utilizzate nella Local Search:
+
+\begin{itemize}
+\item \textbf{getInitialSol:} Questa funzione crea una soluzione di partenza casuale attraverso l'utilizzo di indici random ottenuti grazie ad uno specifico metodo denominato srand
+\item \textbf{evaluate:} Funzione che serve per calcolare il valore di una soluzione 
+\item \textbf{getNeigh:} Questa funzione, partendo da una soluzione iniziale, calcola una nuova soluzione invertendo gli elementi contenuti all'interno di un intervallo pos1 - pos2 i cui indici sono calcolati casualmente grazie ad un metodo denominato srand.
+\end{itemize}
 
 \section{Descrizione dei test effettuati}
 \label{S:3}
@@ -302,9 +320,8 @@ Per verificare le prestazioni degli algoritmi utilizzati nel progetto sono stati
 \item \textbf{Distribuzione uniforme} ovvero uniformemente disposti all'interno dello spazio
 \item In \textbf{cluster} e disposti in tre raggruppamenti
 \item In \textbf{circoli} e disposti in tre circonferenze
-\item In \textbf{linea} e disposti in tre linee \\
+\item In \textbf{linea} e disposti in tre linee
 \end{itemize}
-
 
 \begin{figure}[htbp]
 \centering
@@ -428,7 +445,7 @@ Num Nodi & Tempi CPLEX & Tempi Sim Annealing \\
 
 Già a partire dai 60 nodi abbiamo 33,14 secondi di CPLEX contro i 5,45 di Simulated Annealing, una differenza che è destinata a crescere a dismisura con il crescere dei nodi, arrivando a 1418,18 secondi contro gli 11.49 per quanto riguarda 100 elementi; un guadagno per il Simulated Annealing in quest'ultimo caso di un ordine di grandezza di un fattore pari a 1000.
 
-Osserviamo adesso più nel dettaglio i tempi di esecuzione: la figura 6 ribadisce quanto detto fino ad ora ma evidenzia che, se il Simulated Annealing si comporta pressoché nel medesimo modo per ogni tipologia di dataset, il CPLEX invece già a partire da 50 nodi varia notevolmente nei quattro casi. Il dataset in cui abbiamo tempi di esecuzione migliori e più omogenei è quello relativo alla distribuzione uniforme dei punti mentre Cluster e Circle mettono decisamente più in difficoltà il risolutore. \\ \\
+Osserviamo adesso più nel dettaglio i tempi di esecuzione: la figura 6 ribadisce quanto detto fino ad ora ma evidenzia che, se il Simulated Annealing si comporta pressoché nel medesimo modo per ogni tipologia di dataset, il CPLEX invece già a partire da 50 nodi varia notevolmente nei quattro casi. Il dataset in cui abbiamo tempi di esecuzione migliori e più omogenei è quello relativo alla distribuzione uniforme dei punti mentre Cluster e Circle mettono decisamente più in difficoltà il risolutore. \\
 
 
 \begin{figure}[htbp]
@@ -533,10 +550,45 @@ dove timelimit è stato impostato a 3600 secondi. Il numero di problemi che ha r
 
 {\large \textbf{Test con un maggior numero di passi}}
 
-Come evidenziato nel paragrafo 4.3, sono stati condotti test impostando un numero di passi dinamico molto più alto rispetto ai dati evidenziati in precedenza. Purtroppo però un aumento considerevole di passi non ha comportato il conseguimento di risultati così migliori ed anzi, il marginalissimo guadagno della soluzione calcolata dal Simulated Annealing così impostato non giustifica affatto un aumento così elevato dei tempi di esecuzione. Come si può vedere dalla figura ... \textbf{CONTINUA*****}
+Come evidenziato nel paragrafo 4.3, sono stati condotti test impostando un numero di passi dinamico molto più alto rispetto ai dati evidenziati in precedenza con l'obiettivo di verificare se effettivamente la soluzione trovata per i vari problemi fosse migliore. Nel dettaglio la formula utilizzata è stata la seguente:
+
+\begin{center}
+n\_passi = 2000000.0 * n / 5
+\end{center}
+
+I risultati conseguiti così facendo non sono stati affatto soddisfacenti in quanto, a fronte di un piccolissimo miglioramento della soluzione trovata si è ottenuto un aumento considerevole e molto più rapido dei tempi di esecuzione. Il fenomeno si può osservare nelle figure 11 e 12 dove è ben visibile come i tempi di esecuzione siano passati, per 100 nodi, da circa 11 secondi a più di 90, mentre il guadagno in termini di avvicinamento della soluzione all'ottimo è praticamente quasi nullo.\\
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/confronto_tempi_passi.png} 
+\caption{Grafico che riassume i tempi di esecuzione del Sim Ann utilizzando due diverse quantità dinamiche di passi per l'esecuzione}\label{fig:10}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.50]{grafici_confronti/confronto_soluzioni_passi.png} 
+\caption{Grafico che riassume la distanza in punti percentuali delle soluzioni del Sim Ann utilizzando due diverse quantità dinamiche di passi per l'esecuzione}\label{fig:10}
+\end{figure}
 
 \section{Conclusioni}
 \label{S:5}
+
+Osservando i risultati ottenuti è emerso che il Simulated Annealing, rispetto al CPLEX, non riesce quasi mai a raggiungere l'ottimo ma con l'aiuto anche della Local Search si è riusciti a raffinare sufficientemente la soluzione per ottenere dei valori più che accettabili. Per migliorare i risultati ottenuti si è provato anche ad aumentare il numero di passi dinamici eseguiti ma ciò ha comportato solo un piccolo vantaggio a fronte di un aumento considerevole dei tempi di esecuzione. Ha quindi prevalso l'efficienza dell'algoritmo e si è optato per un numero di passi inferiore per i test di riferimento. 
+
+Paragonando ora i tempi di esecuzione delle due tecniche, abbiamo che dopo un iniziale vantaggio di CPLEX su Simulated Annealing, dai 40 punti in poi i valori si distanziano notevolmente arrivando, per 100 nodi, ad un'elevatissima differenza di 1428 secondi del primo contro gli 11 del secondo. Talvolta è stato addirittura necessario fermare l'esecuzione del risolutore CPLEX poiché anche dopo diverse ore non produceva alcun tipo di risultato, tuttavia i problemi particolarmente complessi in cui è stata necessaria questa manovra drastica erano pochi rispetto al totale. 
+
+A conti fatti quindi, i due algoritmi possiedono pregi che possiamo definire complementari: se si necessita di ottenere una soluzione ottima per i propri problemi e non si bada ai tempi di esecuzione allora CPLEX è ciò che è necessario utilizzare; viceversa, se è molto più importante ottenere risultati in tempi relativamente brevi Simulated Annealing è la scelta più ovvia da attuare per i nostri scopi. 
+
+\subsection{\textbf{Possibili miglioramenti del Simulated Annealing}}
+
+Per migliorare ulteriormente il Simulated Annealing sarebbe stato possibile implementare alcuni accorgimenti che avrebbero reso ancora più efficiente l'algoritmo; tuttavia, visti i contenuti tempi di esecuzione rilevati, si è preferito optare per una maggior semplicità del codice così che risultasse più immediato da leggere ed, eventualmente, espandibile. Gli accorgimenti sono i seguenti:
+
+\begin{itemize}
+\item Terminazione in caso di raggiungimento di un prefissato tempo limite
+\item Terminazione in caso di ottimalità della soluzione trovata
+\item Terminazione in seguito ad un certo numero di iterazioni senza miglioramento della soluzione
+\end{itemize}
+
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
