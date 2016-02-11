@@ -8,23 +8,31 @@
 
 using namespace std;
 
-ifstream XX;
+ifstream inputFile;
 
-Reader::~Reader() {XX.close();}
-Reader::Reader(const char* filename) {
-    XX.open(filename);
-    if (!XX) return;
+Reader::~Reader()
+{
+	inputFile.close();
+}
+
+
+Reader::Reader(const char* filename) 	// Funzione per la lettura di un file
+{
+    inputFile.open(filename);
+    if (!inputFile) return;
     string header;
-    //leggo il numero di nodi e problemi nell'intestazione
-    getline(XX,header,'\n');
+	
+	
+	// Lettura delle info contenute nel file
+    
+	getline(inputFile,header,'\n');		
     header = header.substr(1,header.length()-2);
     vector<float> param(2);
     split(header,", ",param);
-    //cout << "#nodi:\t" << param[0] << "\t#problemi:\t" << param[1] << endl;
+
     Reader::next = 0;
-    Reader::problems = param[0];
-    Reader::nodes = param[1];
-    //XX.close();
+    Reader::problems = param[0];		// Va ad impostare quanti problemi contiene il file
+    Reader::nodes = param[1];			// Va ad impostare quanti nodi contiene ogni problema nel file
     
 }
 
@@ -46,7 +54,7 @@ void Reader::split(string text, string delimiter, vector<float> & e){
 void Reader::getNextProblem(vector<vector<float> > & xy){
     xy.resize(nodes);
     string problem;
-    getline(XX,problem,'\n');
+    getline(inputFile,problem,'\n');
     problem = problem.substr(1,problem.length()-2);
     //cout << problem << endl << endl;
     for (int i = 0; i < nodes; i++){  //per ogni riga
@@ -60,28 +68,3 @@ void Reader::getNextProblem(vector<vector<float> > & xy){
     }
 }
 
-/*
-main(){
-    char cc[20] = "data";
-    char* c = cc;
-    Reader* reader = new Reader(c);
-    //delete c;     //  wut??
-    vector<vector<float> > xy;
-    
-    for (int p = 1; p <= reader->problems; p++){
-        reader->getNextProblem(xy);
-        cout << endl 
-             << "  -----------" << endl
-             << "  Problem n:" << p << endl
-             << "  -----------" << endl;
-        for (int row = 0; row < reader->nodes; row++){
-            for (int col = 0; col < reader->nodes; col++){
-                cout << xy[row][col] << "\t" ;
-            }
-            cout << endl;
-        }
-    }
-    cout << endl;
-    delete reader;
-}
-*/
