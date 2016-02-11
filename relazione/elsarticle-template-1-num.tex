@@ -90,7 +90,15 @@
 
 \usepackage{verbatim}
 
-\journal{Journal Name}
+
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@oddfoot
+}
+\makeatother
 
 \begin{document}
 
@@ -131,7 +139,6 @@
 \end{frontmatter}
 
 %%\begin{abstract}
-
 \textbf{\abstractname{}}
 
 %% Text of abstract
@@ -208,27 +215,26 @@ Il progetto da svolgere richiesto dal corso di Metodi e Modelli per l'Ottimizzaz
 
 Nello specifico, il problema in esame è un problema di ricerca di vicinato e consiste nel definire una soluzione iniziale e cercare di migliorarla esplorando un intorno di questa soluzione; quindi i metodi scelti ed utilizzati all'interno del progetto sono due, la Local Search ed il Simulated Annealing. Si tratta di metodi metaeuristici ovvero tecniche generali di schemi algoritmici concepiti indipendentemente dal problema specifico. Tali metodi definiscono delle componenti e le loro iterazioni al fine di pervenire ad una buona soluzione ed esse inoltre devono essere specializzate per i singoli problemi. In entrambe le metaeuristiche implementate si è infine utilizzato un vicinato del tipo 2-opt.\\
 
-\subsection{\textbf{Descrizione delle metaeuristiche}}
+\subsection{\textbf{Descrizione delle metaeuristiche\\}}
 
 
-\textbf{Local Search}: si definisce una soluzione iniziale e si cerca di migliorarla esplorando un intorno di questa soluzione. Se l'ottimizzazione sull'intorno della soluzione corrente produce una soluzione migliorante il procedimento viene ripetuto partendo, come soluzione corrente, dalla soluzione appena determinata. L'algoritmo termina quando non è più possibile trovare delle soluzioni miglioranti nell'intorno della soluzione corrente o quando è stata determinata una soluzione con valore della funzione obiettivo uguale a qualche bound.\\
+\subsubsection{\textbf{Local Search}}Si definisce una soluzione iniziale e si cerca di migliorarla esplorando un intorno di questa soluzione. Se l'ottimizzazione sull'intorno della soluzione corrente produce una soluzione migliorante il procedimento viene ripetuto partendo, come soluzione corrente, dalla soluzione appena determinata. L'algoritmo termina quando non è più possibile trovare delle soluzioni miglioranti nell'intorno della soluzione corrente o quando è stata determinata una soluzione con valore della funzione obiettivo uguale a qualche bound.\\
 
-\textbf{Simulated Annealing}: il concetto su cui si basa questa metodologia prende spunto dal mondo reale ovvero consiste nel simulare il comportamento di un processo termodinamico di ricottura di materiali solidi. Se un materiale solido viene riscaldato oltre il proprio punto di fusione e poi viene raffreddato in modo da riportarlo allo stato solido, le sue proprietà strutturali dipenderanno fortemente dal processo di raffreddamento. In sostanza tale algoritmo simula il cambiamento di energia di un sistema sottoposto a raffreddamento, fino a che non converge ad uno stato solido; ciò permette di cercare soluzioni ammissibili di problemi di ottimizzazione cercando di convergere verso soluzioni ottime. \\
+\subsubsection{\textbf{Simulated Annealing}}Il concetto su cui si basa questa metodologia prende spunto dal mondo reale ovvero consiste nel simulare il comportamento di un processo termodinamico di ricottura di materiali solidi. Se un materiale solido viene riscaldato oltre il proprio punto di fusione e poi viene raffreddato in modo da riportarlo allo stato solido, le sue proprietà strutturali dipenderanno fortemente dal processo di raffreddamento. In sostanza tale algoritmo simula il cambiamento di energia di un sistema sottoposto a raffreddamento, fino a che non converge ad uno stato solido; ciò permette di cercare soluzioni ammissibili di problemi di ottimizzazione cercando di convergere verso soluzioni ottime. \\
 
 \subsection{\textbf{Implementazione degli algoritmi}\\}
 
-\begin{large}
+\subsubsection{
 \textbf{Risolutore IBM CPLEX}
-\end{large}
+}
 
 
-Il risolutore IBM CPLEX è un programma di ottimizzazione che prende il nome dal metodo del simplesso implementato in linguaggio C (anche se ad oggi offre interfacce verso altri linguaggi ed ambienti). Esso trova soluzioni a problemi di programmazione lineare intera anche di notevoli dimensioni, utilizzando le varianti primale o duale del metodo del simplesso. L'implementazione eseguita per il progetto ricalca a grandi linee quanto fatto durante le lezioni di laboratorio: innanzitutto viene letta la matrice delle adiacenze e linearizzata in un array di dimensioni pari a n*n. Dopodiché si inseriranno in coda i costi degli archi c{\tiny ij} come coefficienti delle variabili decisionali y{\tiny ij}. A questo punto dovranno infine essere creati i vari vincoli definiti nel paragrafo 1.1, sotto la voce "Vincoli", attraverso appositi vettori. \\
+Il risolutore IBM CPLEX è un programma di ottimizzazione che prende il nome dal metodo del simplesso implementato in linguaggio C (anche se ad oggi offre interfacce verso altri linguaggi ed ambienti). Esso trova soluzioni a problemi di programmazione lineare intera anche di notevoli dimensioni, utilizzando le varianti primale o duale del metodo del simplesso. L'implementazione eseguita per il progetto ricalca a grandi linee quanto fatto durante le lezioni di laboratorio: innanzitutto viene letta la matrice delle adiacenze e linearizzata in un array di dimensioni pari a n*n. Dopodiché si inseriranno in coda i costi degli archi c{\tiny ij} come coefficienti delle variabili decisionali y{\tiny ij}. A questo punto dovranno infine essere creati i vari vincoli definiti nel paragrafo 1.1, sotto la voce "Vincoli", attraverso appositi vettori.
 
 
-
-\begin{large}
+\subsubsection{
 \textbf{Local Search}
-\end{large}
+}
 
 \begin{lstlisting}[basicstyle=\small, caption={Local Search}, frame=single, language=C++]
 
@@ -256,9 +262,9 @@ Di seguito verranno ora elencate nel dettaglio le funzioni chiave utilizzate nel
 \item \textbf{evaluate:} Funzione che serve per calcolare il valore di una soluzione 
 \end{itemize}
 
-\begin{large}
+\subsubsection{
 \textbf{Simulated Annealing}
-\end{large}
+}
 
 
 \begin{lstlisting}[basicstyle=\small, caption={Simulated Annealing}, frame=single, language=C++]
@@ -390,10 +396,10 @@ I test condotti per i vari algoritmi sono stati effettuati utilizzando, di volta
 \section{Descrizione dei risultati ottenuti}
 \label{S:4}
 
-I risultati completi ottenuti dall'esecuzione degli algoritmi sono stati riportati all'interno dei file Excel denominati "cplex\_results", "sim\_annealing\_results" e non quindi direttamente nella relazione a causa della mole di dati che comprendono. In questa sede compariranno quindi solo risultati riassuntivi utili a meglio comprendere le conclusioni a cui si è giunti o, eventualmente, rimandi ai file sopraccitati. 
+I risultati completi ottenuti dall'esecuzione degli algoritmi sono stati riportati all'interno dei file Excel denominati "confronti\_dati", "cplex\_results", "sim\_annealing\_results" e non quindi direttamente nella relazione a causa della mole di dati che comprendono. In questa sede compariranno quindi solo risultati riassuntivi utili a meglio comprendere le conclusioni a cui si è giunti o, eventualmente, rimandi ai file sopraccitati. 
 
 \subsection{\textbf{Tempi di esecuzione}}
-Osservando la figura 5 possiamo constatare un dettaglio davvero interessante: i tempi globali di esecuzione della Simulated Annealing sono inizialmente maggiori per i medesimi dataset rispetto a quelli ottenuti tramite CPLEX, si equiparano per insiemi di 30 punti per poi differenziarsi nuovamente. Dai 30 nodi in poi il grafico in scala logaritmica evidenzia come il CPLEX abbia tempi di esecuzioni ben superiori, con una loro crescita generale molto più rapida rispetto al Simulated Annealing che, invece, ha un andamento molto più moderato. Andiamo però a confrontare alcuni numeri: 
+Osservando la figura 5 possiamo constatare un dettaglio davvero interessante: i tempi globali di esecuzione della Simulated Annealing sono inizialmente maggiori per i medesimi dataset rispetto a quelli ottenuti tramite CPLEX, si equiparano per insiemi di 30 punti per poi differenziarsi nuovamente. Dai 30 nodi in poi il grafico in scala logaritmica evidenzia come il CPLEX abbia tempi di esecuzioni ben superiori, con una loro crescita generale molto più rapida rispetto al Simulated Annealing che, invece, ha un andamento molto più moderato. Andiamo però a confrontare alcuni numeri dalla tabella 1: 
 
 \begin{table}[htbp]
 \caption {Tempi medi di esecuzione globali} \label{tab:title} 
@@ -443,7 +449,7 @@ Num Nodi & Tempi CPLEX & Tempi Sim Annealing \\
 \end{center}
 \end{table}
 
-Già a partire dai 60 nodi abbiamo 33,14 secondi di CPLEX contro i 5,45 di Simulated Annealing, una differenza che è destinata a crescere a dismisura con il crescere dei nodi, arrivando a 1418,18 secondi contro gli 11.49 per quanto riguarda 100 elementi; un guadagno per il Simulated Annealing in quest'ultimo caso di un ordine di grandezza di un fattore pari a 1000.
+già a partire dai 60 nodi abbiamo 33,14 secondi di CPLEX contro i 5,45 di Simulated Annealing, una differenza che è destinata a crescere a dismisura con il crescere dei nodi, arrivando a 1418,18 secondi contro gli 11.49 per quanto riguarda 100 elementi; un guadagno per il Simulated Annealing in quest'ultimo caso di un ordine di grandezza di un fattore pari a 1000.
 
 Osserviamo adesso più nel dettaglio i tempi di esecuzione: la figura 6 ribadisce quanto detto fino ad ora ma evidenzia che, se il Simulated Annealing si comporta pressoché nel medesimo modo per ogni tipologia di dataset, il CPLEX invece già a partire da 50 nodi varia notevolmente nei quattro casi. Il dataset in cui abbiamo tempi di esecuzione migliori e più omogenei è quello relativo alla distribuzione uniforme dei punti mentre Cluster e Circle mettono decisamente più in difficoltà il risolutore. \\
 
@@ -462,7 +468,7 @@ Osserviamo adesso più nel dettaglio i tempi di esecuzione: la figura 6 ribadisc
 
 \subsection{\textbf{Simulated Annealing: il miglioramento ad opera della Local Search}}
 
-Come evidenziato nel paragrafo 2.2, la soluzione ottenuta con l'algoritmo di Simulated Annealing è stata ulteriormente raffinata grazie ad una fase di intensificazione realizzata attraverso una Local Search. Si è optato per tale operazione poiché presenta contenuti tempi di esecuzione del metodo in questione in proporzione ai risultati ottenuti. 
+Come evidenziato nel paragrafo 2.2, la soluzione ottenuta con l'algoritmo di Simulated Annealing è stata ulteriormente raffinata grazie ad una fase di intensificazione realizzata attraverso una Local Search. Si è optato per tale operazione poiché presenta contenuti tempi di esecuzione in proporzione ai risultati ottenuti. 
 
 La figura 7 presenta il grafico globale di miglioramento dei risultati ottenuti dalla Simulated Annealing grazie alla Local Search: ad eccezione dei dataset da 10 punti, dove il guadagno è minimo, in tutti gli altri casi si è avuto un miglioramento della soluzione nell'intervallo 6\% - 10\%, che ha quindi permesso all'algoritmo realizzato per il progetto di avvicinarsi ulteriormente alla soluzione ottima calcolata dal CPLEX. Osservando invece la figura 8 possiamo notare i diversi comportamenti sulle quattro tipologie di dataset utilizzate. Gli andamenti sono in generale molto irregolari ma si possono osservare fluttuazioni più contenute per i dataset a Distribuzione Uniforme e a Cluster mentre la Local Search si è trovata più in difficoltà, ed ha avuto risultati più eterogenei, per quanto riguarda i dataset Line e Circle.
 
@@ -480,7 +486,7 @@ La figura 7 presenta il grafico globale di miglioramento dei risultati ottenuti 
 
 \subsection{\textbf{Simulated Annealing e CPLEX: soluzioni a confronto}}
 
-Se i tempi di esecuzione della Simulated Annealing sono notevolmente migliori rispetto a quelli di CPLEX lo stesso non si può dire per le soluzioni calcolate. L'algoritmo implementato nel progetto infatti trova delle soluzioni che si possono definire sub-ottime, caratteristica tipica degli algoritmi appartenenti alle metaeuristiche. Nella figura 9 si osserva proprio ciò: l'andamento del peggioramento è crescente ad eccezione dei primi due gruppi di istanze e spazia tra i 0,89 ed i 7,62 punti percentuali in più rispetto all'ottimo di CPLEX da come si può vedere nella tabella sottostante: 
+Se i tempi di esecuzione della Simulated Annealing sono notevolmente migliori rispetto a quelli di CPLEX lo stesso non si può dire per le soluzioni calcolate. L'algoritmo implementato nel progetto infatti trova delle soluzioni che si possono definire sub-ottime, caratteristica tipica dei metodi appartenenti alle metaeuristiche. Nella figura 9 si osserva proprio ciò: l'andamento del peggioramento è crescente ad eccezione dei primi due gruppi di istanze e spazia tra i 0,89 ed i 7,62 punti percentuali in più rispetto all'ottimo di CPLEX da come si può vedere nella tabella sottostante: 
 
 \begin{table}[htbp]
 \caption {Peggioramento della soluzione ad opera della Sim Annealing} \label{tab:title} 
@@ -539,7 +545,7 @@ La figura 10 mostra invece il medesimo grafico ma suddiviso per tipi di dataset.
 
 In questo paragrafo verranno commentati altri test condotti con diverse configurazioni rispetto a quelle precedentemente evidenziate nonché alcune considerazioni e risultati relativi ai dati fino ad ora esposti. \\
 
-{\large \textbf{Limite di tempo CPLEX: cosa è emerso}}
+\subsubsection{ \textbf{Limite di tempo CPLEX: cosa è emerso}}
 
 Durante i test eseguiti con CPLEX è stato impostato un limite di tempo entro cui la soluzione doveva essere calcolata, questo perché sono state individuate alcune istanze con cui il risolutore incontrava notevoli difficoltà e che anche dopo molte ore non produceva alcun tipo di risultato in output. Il comando con cui si è eseguito ciò è il seguente:
 
@@ -548,7 +554,7 @@ CPXsetdblparam(env, CPX\_PARAM\_TILIM, timelimit)
 \end{center}
 dove timelimit è stato impostato a 3600 secondi. Il numero di problemi che ha raggiunto tale upper bound sono solo 10 su 140, tutti collocati nella fascia di nodi 70 - 100, ed in questo caso si è preso come valore di riferimento per l'ottimo quello che era stato calcolato fino a quel momento. Come si può vedere quindi, ciò non ha costituito la "norma" per le varie istanze quanto piuttosto dei casi isolati che era comunque doveroso trattare adeguatamente.\\
 
-{\large \textbf{Test con un maggior numero di passi}}
+\subsubsection{  \textbf{Test con un maggior numero di passi}}
 
 Come evidenziato nel paragrafo 4.3, sono stati condotti test impostando un numero di passi dinamico molto più alto rispetto ai dati evidenziati in precedenza con l'obiettivo di verificare se effettivamente la soluzione trovata per i vari problemi fosse migliore. Nel dettaglio la formula utilizzata è stata la seguente:
 
@@ -581,7 +587,7 @@ A conti fatti quindi, i due algoritmi possiedono pregi che possiamo definire com
 
 \subsection{\textbf{Possibili miglioramenti del Simulated Annealing}}
 
-Per migliorare ulteriormente il Simulated Annealing sarebbe stato possibile implementare alcuni accorgimenti che avrebbero reso ancora più efficiente l'algoritmo; tuttavia, visti i contenuti tempi di esecuzione rilevati, si è preferito optare per una maggior semplicità del codice così che risultasse più immediato da leggere ed, eventualmente, espandibile. Gli accorgimenti sono i seguenti:
+Per migliorare ulteriormente il Simulated Annealing sarebbe stato possibile implementare alcuni accorgimenti che avrebbero reso ancora più efficiente l'algoritmo; tuttavia, visti i già contenuti tempi di esecuzione rilevati, si è preferito optare per una maggior semplicità del codice così che risultasse più immediato da leggere ed, eventualmente, espandere. Gli accorgimenti sono i seguenti:
 
 \begin{itemize}
 \item Terminazione in caso di raggiungimento di un prefissato tempo limite

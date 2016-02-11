@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  10 FEB 2016 19:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  11 FEB 2016 15:36
 entering extended mode
 **elsarticle-template-1-num.tex
 (elsarticle-template-1-num.tex
@@ -426,18 +426,18 @@ LaTeX Warning: Label `fig:10' multiply defined.
 LaTeX Warning: Label `fig:10' multiply defined.
 
 )
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 95.
-LaTeX Font Info:    ... okay on input line 95.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 95.
-LaTeX Font Info:    ... okay on input line 95.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 95.
-LaTeX Font Info:    ... okay on input line 95.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 95.
-LaTeX Font Info:    ... okay on input line 95.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 95.
-LaTeX Font Info:    ... okay on input line 95.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 95.
-LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
  ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count117
@@ -452,14 +452,14 @@ LaTeX Font Info:    ... okay on input line 95.
 \makeMPintoPDFobject=\count122
 \everyMPtoPDFconversion=\toks25
 )
-LaTeX Info: Redefining \it@ocap on input line 95.
-LaTeX Info: Redefining \it@ccap on input line 95.
+LaTeX Info: Redefining \it@ocap on input line 103.
+LaTeX Info: Redefining \it@ccap on input line 103.
 \c@lstlisting=\count123
-LaTeX Font Info:    Try loading font information for U+msa on input line 131.
+LaTeX Font Info:    Try loading font information for U+msa on input line 139.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 131.
+LaTeX Font Info:    Try loading font information for U+msb on input line 139.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -467,59 +467,59 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 155--157
+Underfull \hbox (badness 10000) in paragraph at lines 162--164
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 163.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 170.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 163.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 170.
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--192
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--199
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 209--210
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 216--217
 
  []
 
-[3]
+
 Underfull \hbox (badness 10000) in paragraph at lines 218--218
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--226
+Underfull \hbox (badness 10000) in paragraph at lines 221--222
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 
  []
 
@@ -530,20 +530,20 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 ) [4]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 267.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 273.
  [5] [6]
 <grafici_istanze/random_60.png, id=34, 586.8324pt x 456.7464pt>
 File: grafici_istanze/random_60.png Graphic file (type png)
 
 <use grafici_istanze/random_60.png>
-Package pdftex.def Info: grafici_istanze/random_60.png used on input line 328.
+Package pdftex.def Info: grafici_istanze/random_60.png used on input line 334.
 (pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
 
 <grafici_istanze/cluster_60.png, id=36, 586.8324pt x 456.7464pt>
 File: grafici_istanze/cluster_60.png Graphic file (type png)
 
 <use grafici_istanze/cluster_60.png>
-Package pdftex.def Info: grafici_istanze/cluster_60.png used on input line 334.
+Package pdftex.def Info: grafici_istanze/cluster_60.png used on input line 340.
 
 (pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
 
@@ -551,37 +551,37 @@ Package pdftex.def Info: grafici_istanze/cluster_60.png used on input line 334.
 File: grafici_istanze/circle_60.png Graphic file (type png)
 
 <use grafici_istanze/circle_60.png>
-Package pdftex.def Info: grafici_istanze/circle_60.png used on input line 340.
+Package pdftex.def Info: grafici_istanze/circle_60.png used on input line 346.
 (pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
 
 <grafici_istanze/line_60.png, id=38, 586.8324pt x 456.7464pt>
 File: grafici_istanze/line_60.png Graphic file (type png)
 
 <use grafici_istanze/line_60.png>
-Package pdftex.def Info: grafici_istanze/line_60.png used on input line 346.
+Package pdftex.def Info: grafici_istanze/line_60.png used on input line 352.
 (pdftex.def)             Requested size: 293.41548pt x 228.37263pt.
  [7] [8 <./grafici_istanze/random_60.png> <./grafici_istanze/cluster_60.png>] [
 9 <./grafici_istanze/circle_60.png> <./grafici_istanze/line_60.png>]
 
-LaTeX Warning: Characters dropped after `\end{comment}' on input line 388.
+LaTeX Warning: Characters dropped after `\end{comment}' on input line 394.
 
 
-Overfull \hbox (45.39207pt too wide) in paragraph at lines 393--394
-\T1/cmr/m/n/12 por-ta-ti al-l'in-ter-no dei fi-le Ex-cel de-no-mi-na-ti "cplex_
-results", "sim_annealing_results"
+Overfull \hbox (5.3866pt too wide) in paragraph at lines 399--400
+\T1/cmr/m/n/12 por-ta-ti al-l'in-ter-no dei fi-le Ex-cel de-no-mi-na-ti "con-fr
+on-ti_dati", "cplex_results",
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 448--449
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 454--455
 
  []
 
-[10] <grafici_confronti/tempi_glob_esec.png, id=56, 519.74174pt x 343.2825pt>
+<grafici_confronti/tempi_glob_esec.png, id=56, 519.74174pt x 343.2825pt>
 File: grafici_confronti/tempi_glob_esec.png Graphic file (type png)
 
 <use grafici_confronti/tempi_glob_esec.png>
 Package pdftex.def Info: grafici_confronti/tempi_glob_esec.png used on input li
-ne 453.
+ne 459.
 (pdftex.def)             Requested size: 259.87024pt x 171.64082pt.
 
 <grafici_confronti/tempi_di_esecuzione.png, id=57, 531.78674pt x 346.896pt>
@@ -589,7 +589,7 @@ File: grafici_confronti/tempi_di_esecuzione.png Graphic file (type png)
 
 <use grafici_confronti/tempi_di_esecuzione.png>
 Package pdftex.def Info: grafici_confronti/tempi_di_esecuzione.png used on inpu
-t line 459.
+t line 465.
 (pdftex.def)             Requested size: 265.89272pt x 173.44757pt.
  [11] [12 <./grafici_confronti/tempi_glob_esec.png (PNG copy)> <./grafici_confr
 onti/tempi_di_esecuzione.png (PNG copy)>]
@@ -598,7 +598,7 @@ File: grafici_confronti/guadagno_LS_globale.png Graphic file (type png)
 
 <use grafici_confronti/guadagno_LS_globale.png>
 Package pdftex.def Info: grafici_confronti/guadagno_LS_globale.png used on inpu
-t line 471.
+t line 477.
 (pdftex.def)             Requested size: 239.89565pt x 147.55087pt.
 
 <grafici_confronti/guadagno_LS.png, id=65, 490.83376pt x 296.307pt>
@@ -606,7 +606,7 @@ File: grafici_confronti/guadagno_LS.png Graphic file (type png)
 
 <use grafici_confronti/guadagno_LS.png>
 Package pdftex.def Info: grafici_confronti/guadagno_LS.png used on input line 4
-77.
+83.
 (pdftex.def)             Requested size: 245.41628pt x 148.15314pt.
  [13 <./grafici_confronti/guadagno_LS_globale.png (PNG copy)> <./grafici_confro
 nti/guadagno_LS.png (PNG copy)>]
@@ -616,7 +616,7 @@ pt>
 File: grafici_confronti/peggioramento_SA_globale.png Graphic file (type png)
  <use grafici_confronti/peggioramento_SA_globale.png>
 Package pdftex.def Info: grafici_confronti/peggioramento_SA_globale.png used on
- input line 528.
+ input line 534.
 (pdftex.def)             Requested size: 241.15034pt x 148.3037pt.
 
 <grafici_confronti/peggioramento_SA.png, id=74, 489.32813pt x 301.62688pt>
@@ -624,21 +624,21 @@ File: grafici_confronti/peggioramento_SA.png Graphic file (type png)
 
 <use grafici_confronti/peggioramento_SA.png>
 Package pdftex.def Info: grafici_confronti/peggioramento_SA.png used on input l
-ine 534.
+ine 540.
 (pdftex.def)             Requested size: 244.66345pt x 150.81306pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--541
+Underfull \hbox (badness 10000) in paragraph at lines 546--547
 
  []
 
 [15 <./grafici_confronti/peggioramento_SA_globale.png (PNG copy)> <./grafici_co
 nfronti/peggioramento_SA.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 549--550
+Underfull \hbox (badness 10000) in paragraph at lines 555--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 559--560
+Underfull \hbox (badness 10000) in paragraph at lines 565--566
 
  []
 
@@ -647,7 +647,7 @@ File: grafici_confronti/confronto_tempi_passi.png Graphic file (type png)
 
 <use grafici_confronti/confronto_tempi_passi.png>
 Package pdftex.def Info: grafici_confronti/confronto_tempi_passi.png used on in
-put line 563.
+put line 569.
 (pdftex.def)             Requested size: 241.90315pt x 142.53215pt.
 
 <grafici_confronti/confronto_soluzioni_passi.png, id=79, 491.8375pt x 290.08376
@@ -655,7 +655,7 @@ pt>
 File: grafici_confronti/confronto_soluzioni_passi.png Graphic file (type png)
  <use grafici_confronti/confronto_soluzioni_passi.png>
 Package pdftex.def Info: grafici_confronti/confronto_soluzioni_passi.png used o
-n input line 569.
+n input line 575.
 (pdftex.def)             Requested size: 245.91814pt x 145.04152pt.
  [16] [17 <./grafici_confronti/confronto_tempi_passi.png (PNG copy)> <./grafici
 _confronti/confronto_soluzioni_passi.png (PNG copy)>]
@@ -687,7 +687,7 @@ s/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX
 2.9/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts
 /type1/public/cm-super/sfti1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
 blic/cm-super/sfti1200.pfb>
-Output written on elsarticle-template-1-num.pdf (18 pages, 606641 bytes).
+Output written on elsarticle-template-1-num.pdf (18 pages, 603685 bytes).
 PDF statistics:
  134 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
